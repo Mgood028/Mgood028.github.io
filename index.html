@@ -68,6 +68,7 @@
   .sec-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem}
   .sec-title{font-size:clamp(28px,4vw,40px);font-weight:600;color:var(--text);letter-spacing:-0.02em}
 
+  /* ABOUT — expanded layout */
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
   .about-text{font-size:17px;line-height:1.8;color:var(--subtext1)}
   .about-text p{margin-bottom:1.2rem}
@@ -75,6 +76,22 @@
   .stat-card{background:var(--mantle);border:1px solid var(--surface0);border-radius:6px;padding:1.5rem}
   .stat-num{font-family:var(--mono);font-size:32px;font-weight:600;color:var(--lavender);line-height:1}
   .stat-label{font-size:13px;color:var(--overlay1);margin-top:0.3rem}
+
+  /* Coursework highlight strip */
+  .about-coursework{margin-top:3rem;padding:2rem;background:var(--mantle);border:1px solid var(--surface0);border-radius:8px}
+  .about-coursework-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem}
+  .course-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0.75rem}
+  .course-item{background:var(--surface0);border-radius:4px;padding:0.85rem 1rem}
+  .course-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:0.25rem}
+  .course-detail{font-size:12px;color:var(--overlay1);line-height:1.5}
+
+  /* Career goals callout */
+  .about-goals{margin-top:2rem;border-left:3px solid var(--mauve);padding-left:1.5rem}
+  .about-goals-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem}
+  .about-goals p{font-size:15px;color:var(--subtext0);line-height:1.75;margin-bottom:0.75rem}
+  .about-goals p:last-child{margin-bottom:0}
+  .goals-certs{display:flex;flex-wrap:wrap;gap:6px;margin-top:0.75rem}
+  .goals-cert-tag{font-family:var(--mono);font-size:10px;padding:3px 10px;background:rgba(203,166,247,0.1);border:1px solid var(--mauve);border-radius:3px;color:var(--mauve);letter-spacing:0.04em}
 
   .exp-list{display:flex;flex-direction:column}
   .exp-item{display:grid;grid-template-columns:200px 1fr;gap:2rem;padding:2.5rem 0;border-bottom:1px solid var(--surface0);position:relative}
@@ -126,6 +143,7 @@
     .about-grid,.edu-grid,.cert-grid,.exp-item{grid-template-columns:1fr}
     .exp-item{gap:0.5rem}
     .nav-links{gap:1rem}
+    .course-items{grid-template-columns:1fr 1fr}
   }
 </style>
 </head>
@@ -172,26 +190,62 @@
     </div>
     <div class="about-grid">
       <div class="about-text">
-        <p>I have a huge love for all things technology. Problem solving and learning are what motivate me in life.</p>
-        <p>My journey started at Best Buy's Geek Squad, where I learned that great IT isn't just about fixing things — it's about understanding people's needs. That foundation led me through infrastructure management at a credit union, and now to Process Panda, where I build custom ITSM solutions for enterprise clients.</p>
-        <p>I'm also pursuing my BS in Information Science at USF while working full-time, because I'm committed to staying ahead of the curve in this industry.</p>
+        <p>My name is Mason Good and I'm based in Tampa, Florida. I'm completing my degree in Information Systems at USF with a focus on data science. Since as early as I can remember I was engrossed in technology — helping my mom fix the cords on the VHS and DVD players, that kind of thing. That curiosity never went away.</p>
+        <p>It led me to video games, then to IT, and eventually down the data science path. I love knowledge and I love learning, and data science is all about information. That pull has only grown stronger as my career has progressed.</p>
+        <p>My journey started at Best Buy's Geek Squad, where I learned that great IT isn't just about fixing things — it's about understanding people's needs. That foundation led me through infrastructure management at a credit union, and now to Process Panda, where I build custom ITSM solutions for enterprise clients like Perdue Farms and the City of San Jose.</p>
+
+        <div class="about-goals">
+          <div class="about-goals-label">// where I'm headed</div>
+          <p>I know where I want to go — the move now is closing the gap between the IT work I do every day and the analytics depth the data science field demands. My IS coursework gave me a real foundation in k-NN, logistic regression, clustering, and SVM, but I'm pushing that further deliberately outside the classroom.</p>
+          <p>The certifications that make sense next are on the analytics side. I already sit across the table from organizations every day as a consultant. Data scientist is the fourth fastest growing occupation in the country right now — and I already understand how these organizations actually work.</p>
+          <div class="goals-certs">
+            <span class="goals-cert-tag">Google Data Analytics Cert</span>
+            <span class="goals-cert-tag">IBM Data Science Professional</span>
+            <span class="goals-cert-tag">Tableau Certification</span>
+            <span class="goals-cert-tag">Power BI Certification</span>
+          </div>
+        </div>
       </div>
-      <div class="about-stats">
-        <div class="stat-card">
-          <div class="stat-num">4+</div>
-          <div class="stat-label">years in IT</div>
+      <div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-num">4+</div>
+            <div class="stat-label">years in IT</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">3.9</div>
+            <div class="stat-label">GPA at USF</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">5+</div>
+            <div class="stat-label">enterprise clients</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">2</div>
+            <div class="stat-label">active certs</div>
+          </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-num">3.9</div>
-          <div class="stat-label">GPA at USF</div>
+      </div>
+    </div>
+
+    <div class="about-coursework">
+      <div class="about-coursework-label">// USF coursework highlights</div>
+      <div class="course-items">
+        <div class="course-item">
+          <div class="course-name">R Programming</div>
+          <div class="course-detail">k-NN, logistic regression, decision trees, association rules, SVM — applied to real datasets. Built the NaCleaner R package.</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-num">5+</div>
-          <div class="stat-label">enterprise clients</div>
+        <div class="course-item">
+          <div class="course-name">Visual Analytics</div>
+          <div class="course-detail">Four ggplot2 visualizations for a World Happiness Report analysis. Data Engineer on a measles vaccination project using Shiny and Leaflet.</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-num">2</div>
-          <div class="stat-label">active certs</div>
+        <div class="course-item">
+          <div class="course-name">Information Behavior</div>
+          <div class="course-detail">Annotated bibliography and research proposal on ITSM consultants' information-seeking behavior using Kuhlthau's ISP model.</div>
+        </div>
+        <div class="course-item">
+          <div class="course-name">Cluster Analysis</div>
+          <div class="course-detail">Hierarchical and k-means clustering, silhouette analysis. Applied alongside SVM and Naive Bayes for prediction tasks.</div>
         </div>
       </div>
     </div>
