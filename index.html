@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mason Good — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --base:#1e1e2e;
+    --mantle:#181825;
+    --crust:#11111b;
+    --surface0:#313244;
+    --surface1:#45475a;
+    --surface2:#585b70;
+    --overlay0:#6c7086;
+    --overlay1:#7f849c;
+    --overlay2:#9399b2;
+    --subtext0:#a6adc8;
+    --subtext1:#bac2de;
+    --text:#cdd6f4;
+    --lavender:#b4befe;
+    --blue:#89b4fa;
+    --sapphire:#74c7ec;
+    --sky:#89dceb;
+    --teal:#94e2d5;
+    --green:#a6e3a1;
+    --yellow:#f9e2af;
+    --peach:#fab387;
+    --maroon:#eba0ac;
+    --red:#f38ba8;
+    --mauve:#cba6f7;
+    --pink:#f5c2e7;
+    --flamingo:#f2cdcd;
+    --rosewater:#f5e0dc;
+    --mono:'IBM Plex Mono',monospace;
+    --sans:'Space Grotesk',sans-serif;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--base);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(30,30,46,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--surface0);padding:0 2rem}
+  .nav-inner{max-width:1100px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:var(--mono);font-size:14px;color:var(--mauve);letter-spacing:0.05em}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{font-size:13px;color:var(--overlay1);text-decoration:none;font-family:var(--mono);letter-spacing:0.03em;transition:color 0.2s}
+  .nav-links a:hover{color:var(--lavender)}
+
+  section{max-width:1100px;margin:0 auto;padding:6rem 2rem}
+
+  .hero{padding-top:10rem;padding-bottom:6rem;position:relative}
+  .hero-tag{font-family:var(--mono);font-size:12px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.6s 0.1s forwards}
+  .hero-name{font-size:clamp(48px,7vw,88px);font-weight:600;color:var(--text);line-height:1;letter-spacing:-0.03em;margin-bottom:1rem;opacity:0;animation:fadeUp 0.6s 0.2s forwards}
+  .hero-name span{color:var(--lavender)}
+  .hero-sub{font-size:clamp(18px,2.5vw,24px);color:var(--subtext0);font-weight:300;margin-bottom:2.5rem;max-width:540px;opacity:0;animation:fadeUp 0.6s 0.3s forwards}
+  .hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:3rem;opacity:0;animation:fadeUp 0.6s 0.4s forwards}
+  .pill{font-family:var(--mono);font-size:11px;padding:4px 12px;border:1px solid var(--surface1);border-radius:3px;color:var(--overlay2);letter-spacing:0.05em}
+  .pill.active{border-color:var(--mauve);color:var(--mauve)}
+  .hero-cta{display:flex;gap:1rem;opacity:0;animation:fadeUp 0.6s 0.5s forwards}
+  .btn{font-family:var(--mono);font-size:12px;padding:10px 24px;border-radius:3px;text-decoration:none;letter-spacing:0.05em;transition:all 0.2s;cursor:pointer;border:none;display:inline-block}
+  .btn-primary{background:var(--mauve);color:var(--crust);font-weight:600}
+  .btn-primary:hover{background:var(--lavender)}
+  .btn-outline{background:transparent;color:var(--mauve);border:1px solid var(--mauve)}
+  .btn-outline:hover{background:rgba(203,166,247,0.1)}
+
+  .sec-header{margin-bottom:3rem}
+  .sec-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem}
+  .sec-title{font-size:clamp(28px,4vw,40px);font-weight:600;color:var(--text);letter-spacing:-0.02em}
+
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+  .about-text{font-size:17px;line-height:1.8;color:var(--subtext1)}
+  .about-text p{margin-bottom:1.2rem}
+  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .stat-card{background:var(--mantle);border:1px solid var(--surface0);border-radius:6px;padding:1.5rem}
+  .stat-num{font-family:var(--mono);font-size:32px;font-weight:600;color:var(--lavender);line-height:1}
+  .stat-label{font-size:13px;color:var(--overlay1);margin-top:0.3rem}
+
+  .exp-list{display:flex;flex-direction:column}
+  .exp-item{display:grid;grid-template-columns:200px 1fr;gap:2rem;padding:2.5rem 0;border-bottom:1px solid var(--surface0);position:relative}
+  .exp-item:first-child{border-top:1px solid var(--surface0)}
+  .exp-meta{padding-top:2px}
+  .exp-period{font-family:var(--mono);font-size:11px;color:var(--overlay0);letter-spacing:0.05em;margin-bottom:0.4rem}
+  .exp-company{font-size:13px;color:var(--sapphire);font-weight:500}
+  .exp-title{font-size:18px;font-weight:600;color:var(--text);margin-bottom:0.3rem}
+  .exp-location{font-family:var(--mono);font-size:11px;color:var(--overlay0);margin-bottom:1rem}
+  .exp-bullets{list-style:none;margin-bottom:1rem}
+  .exp-bullets li{padding-left:1.2rem;position:relative;margin-bottom:0.4rem;font-size:14px;color:var(--subtext1)}
+  .exp-bullets li::before{content:'›';position:absolute;left:0;color:var(--mauve)}
+  .exp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:0.8rem}
+  .tag{font-family:var(--mono);font-size:10px;padding:3px 10px;background:var(--surface0);border:1px solid var(--surface1);border-radius:3px;color:var(--overlay2);letter-spacing:0.04em}
+
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+  .skill-group{background:var(--mantle);border:1px solid var(--surface0);border-radius:6px;padding:1.5rem}
+  .skill-group-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem}
+  .skill-items{display:flex;flex-wrap:wrap;gap:6px}
+  .skill-badge{font-size:12px;padding:4px 10px;background:var(--surface0);border:1px solid var(--surface1);border-radius:3px;color:var(--subtext1)}
+
+  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .edu-card{background:var(--mantle);border:1px solid var(--surface0);border-radius:6px;padding:1.75rem}
+  .edu-school{font-size:16px;font-weight:600;color:var(--text);margin-bottom:0.2rem}
+  .edu-degree{font-size:13px;color:var(--blue);margin-bottom:0.4rem}
+  .edu-detail{font-family:var(--mono);font-size:11px;color:var(--overlay0)}
+  .cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+  .cert-card{background:var(--mantle);border:1px solid var(--mauve);border-radius:6px;padding:1.5rem;display:flex;gap:1rem;align-items:flex-start}
+  .cert-icon{width:36px;height:36px;background:rgba(203,166,247,0.12);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--mono);font-size:10px;color:var(--mauve);font-weight:600}
+  .cert-name{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.2rem}
+  .cert-issuer{font-size:12px;color:var(--overlay1)}
+  .cert-exp{font-family:var(--mono);font-size:10px;color:var(--mauve);margin-top:0.3rem}
+
+  .contact-inner{background:var(--mantle);border:1px solid var(--surface0);border-radius:8px;padding:3rem;text-align:center}
+  .contact-title{font-size:clamp(24px,3vw,36px);font-weight:600;color:var(--text);margin-bottom:0.75rem}
+  .contact-sub{font-size:16px;color:var(--subtext0);margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto}
+  .contact-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+  .contact-link{font-family:var(--mono);font-size:12px;padding:10px 20px;border:1px solid var(--surface1);border-radius:3px;color:var(--subtext1);text-decoration:none;transition:all 0.2s;letter-spacing:0.04em}
+  .contact-link:hover{border-color:var(--mauve);color:var(--mauve)}
+  .contact-link.primary{background:var(--mauve);color:var(--crust);border-color:var(--mauve);font-weight:600}
+  .contact-link.primary:hover{background:var(--lavender);border-color:var(--lavender)}
+
+  footer{border-top:1px solid var(--surface0);padding:2rem;text-align:center}
+  footer p{font-family:var(--mono);font-size:11px;color:var(--overlay0);letter-spacing:0.05em}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+  @media(max-width:768px){
+    .about-grid,.edu-grid,.cert-grid,.exp-item{grid-template-columns:1fr}
+    .exp-item{gap:0.5rem}
+    .nav-links{gap:1rem}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">mason@good:~$</span>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#education">education</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-tag">// IT consultant & implementation specialist</div>
+    <h1 class="hero-name">Mason<br><span>Good.</span></h1>
+    <p class="hero-sub">Building enterprise ITSM solutions, writing SQL that actually works, and staying curious about everything in between.</p>
+    <div class="hero-pills">
+      <span class="pill active">HaloITSM</span>
+      <span class="pill active">SQL</span>
+      <span class="pill active">REST APIs</span>
+      <span class="pill">ITIL Certified</span>
+      <span class="pill">CompTIA A+</span>
+      <span class="pill">Python</span>
+      <span class="pill">R</span>
+      <span class="pill">Active Directory</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary">view my work</a>
+      <a href="#contact" class="btn btn-outline">get in touch</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="sec-header">
+      <div class="sec-label">// 01 — about</div>
+      <h2 class="sec-title">Who I am.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I have a huge love for all things technology. Problem solving and learning are what motivate me in life.</p>
+        <p>My journey started at Best Buy's Geek Squad, where I learned that great IT isn't just about fixing things — it's about understanding people's needs. That foundation led me through infrastructure management at a credit union, and now to Process Panda, where I build custom ITSM solutions for enterprise clients.</p>
+        <p>I'm also pursuing my BS in Information Science at USF while working full-time, because I'm committed to staying ahead of the curve in this industry.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">3+</div>
+          <div class="stat-label">years in IT</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3.9</div>
+          <div class="stat-label">GPA at USF</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">enterprise clients</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2</div>
+          <div class="stat-label">active certs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-header">
+      <div class="sec-label">// 02 — experience</div>
+      <h2 class="sec-title">Where I've worked.</h2>
+    </div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Apr 2025 — Present</div>
+          <div class="exp-company">Process Panda</div>
+        </div>
+        <div>
+          <div class="exp-title">Implementation Specialist</div>
+          <div class="exp-location">Florida, United States · On-site</div>
+          <ul class="exp-bullets">
+            <li>Design and manage advanced SQL queries within HaloITSM for custom reporting, analytics, and dynamic data retrieval.</li>
+            <li>Administer and enhance the HaloITSM environment including custom fields, forms, and multi-select lookups.</li>
+            <li>Deploy tailored ITSM solutions for enterprise clients including Perdue Farms, Chef's Warehouse, and Bright Horizons.</li>
+            <li>Integrate and manage APIs to extend HaloITSM functionality and enable automation with external systems.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tag">HaloITSM</span><span class="tag">MS SQL Server</span><span class="tag">REST APIs</span><span class="tag">ITIL</span><span class="tag">Azure AD</span><span class="tag">Python</span>
+          </div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Apr 2024 — Apr 2025</div>
+          <div class="exp-company">Pinellas Federal Credit Union</div>
+        </div>
+        <div>
+          <div class="exp-title">IT Support Specialist</div>
+          <div class="exp-location">United States · On-site</div>
+          <ul class="exp-bullets">
+            <li>Planned and deployed a company-wide workstation upgrade — imaged Dell OptiPlex desktops with Acronis.</li>
+            <li>Managed Active Directory and MS Exchange including user access, permissions, and system maintenance.</li>
+            <li>Monitored and troubleshot Cisco Firepower 1000 firewalls, Cisco 8000 series routers, and HP/Netgear managed switches.</li>
+            <li>Managed and backed up internal Dell servers via KVM.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tag">Active Directory</span><span class="tag">MS Exchange</span><span class="tag">Cisco Firepower</span><span class="tag">RDP</span><span class="tag">Symitar</span><span class="tag">SentinelOne</span>
+          </div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Jun 2022 — Apr 2024</div>
+          <div class="exp-company">Best Buy — Geek Squad</div>
+        </div>
+        <div>
+          <div class="exp-title">Computer Repair Technician</div>
+          <div class="exp-location">Tampa, Florida · On-site</div>
+          <ul class="exp-bullets">
+            <li>Built and troubleshot custom desktop systems to user-defined specifications.</li>
+            <li>Performed hardware repairs on laptops and iPhones (screens, batteries, HDD, RAM).</li>
+            <li>Managed and tracked all parts for Apple and PC repairs with meticulous documentation.</li>
+            <li>Handled device shipping and tracking through FedEx/UPS for phones, TVs, laptops, and consoles.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tag">Windows OS</span><span class="tag">macOS</span><span class="tag">Hardware Repair</span><span class="tag">iOS</span><span class="tag">MS 365</span><span class="tag">Documentation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-header">
+      <div class="sec-label">// 03 — skills</div>
+      <h2 class="sec-title">What I work with.</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-label">ITSM & Platforms</div>
+        <div class="skill-items">
+          <span class="skill-badge">HaloITSM</span><span class="skill-badge">ITIL v4</span><span class="skill-badge">Microsoft Azure</span><span class="skill-badge">Azure AD</span><span class="skill-badge">CrowdStrike</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Languages</div>
+        <div class="skill-items">
+          <span class="skill-badge">SQL</span><span class="skill-badge">Python</span><span class="skill-badge">R</span><span class="skill-badge">REST APIs</span><span class="skill-badge">JSON</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Infrastructure</div>
+        <div class="skill-items">
+          <span class="skill-badge">Active Directory</span><span class="skill-badge">MS Exchange</span><span class="skill-badge">Cisco Firepower</span><span class="skill-badge">Managed Switches</span><span class="skill-badge">KVM</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Data & Analytics</div>
+        <div class="skill-items">
+          <span class="skill-badge">MS SQL Server</span><span class="skill-badge">Visual Analytics</span><span class="skill-badge">Power BI</span><span class="skill-badge">ggplot2</span><span class="skill-badge">Data Analysis</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="sec-header">
+      <div class="sec-label">// 04 — education & certs</div>
+      <h2 class="sec-title">Credentials.</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-school">University of South Florida</div>
+        <div class="edu-degree">BS — Information Science, Data Sci & Analytics</div>
+        <div class="edu-detail">Aug 2024 – May 2026 &nbsp;·&nbsp; GPA: 3.9</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-school">St. Petersburg College</div>
+        <div class="edu-degree">Associate's Degree — Information Technology</div>
+        <div class="edu-detail">Aug 2020 – May 2023 &nbsp;·&nbsp; GPA: 3.6</div>
+      </div>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon">A+</div>
+        <div>
+          <div class="cert-name">CompTIA A+</div>
+          <div class="cert-issuer">CompTIA</div>
+          <div class="cert-exp">Issued Sep 2025 · Expires Sep 2028</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">ITIL</div>
+        <div>
+          <div class="cert-name">ITIL® Foundation</div>
+          <div class="cert-issuer">PeopleCert</div>
+          <div class="cert-exp">Issued Jun 2025 · Expires Jun 2028</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-inner">
+      <h2 class="contact-title">Let's work together.</h2>
+      <p class="contact-sub">I'm always open to interesting problems, new projects, or just a good conversation about IT.</p>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/mason-good-76389b259/" class="contact-link primary" target="_blank">LinkedIn</a>
+        <a href="https://github.com/Mgood028" class="contact-link" target="_blank">GitHub</a>
+        <a href="https://masons-programming-journal.blogspot.com" class="contact-link" target="_blank">Blog</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>mason good · built with intent · florida</p>
+</footer>
+
+</body>
+</html>
