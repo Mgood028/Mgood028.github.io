@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study — Software Database Management | Mason Good</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--base:#1e1e2e;
+--mantle:#181825;
+--crust:#11111b;
+--surface0:#313244;
+--surface1:#45475a;
+--surface2:#585b70;
+--overlay0:#6c7086;
+--overlay1:#7f849c;
+--overlay2:#9399b2;
+--subtext0:#a6adc8;
+--subtext1:#bac2de;
+--text:#cdd6f4;
+--lavender:#b4befe;
+--blue:#89b4fa;
+--sapphire:#74c7ec;
+--sky:#89dceb;
+--teal:#94e2d5;
+--green:#a6e3a1;
+--yellow:#f9e2af;
+--peach:#fab387;
+--maroon:#eba0ac;
+--red:#f38ba8;
+--mauve:#cba6f7;
+--pink:#f5c2e7;
+--flamingo:#f2cdcd;
+--rosewater:#f5e0dc;
+--mono:'IBM Plex Mono',monospace;
+--sans:'Space Grotesk',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--base);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(30,30,46,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--surface0);padding:0 2rem}
+.nav-inner{max-width:1100px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--mono);font-size:14px;color:var(--mauve);letter-spacing:0.05em;text-decoration:none}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:13px;color:var(--overlay1);text-decoration:none;font-family:var(--mono);letter-spacing:0.03em;transition:color 0.2s}
+.nav-links a:hover{color:var(--lavender)}
+
+.page-wrap{max-width:860px;margin:0 auto;padding:8rem 2rem 6rem}
+
+/* Hero */
+.cs-hero{margin-bottom:4rem;opacity:0;animation:fadeUp 0.6s 0.1s forwards}
+.cs-back{font-family:var(--mono);font-size:12px;color:var(--overlay1);text-decoration:none;letter-spacing:0.05em;display:inline-flex;align-items:center;gap:6px;margin-bottom:2rem;transition:color 0.2s}
+.cs-back:hover{color:var(--mauve)}
+.cs-tag{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem}
+.cs-title{font-size:clamp(32px,5vw,56px);font-weight:600;color:var(--text);letter-spacing:-0.02em;line-height:1.1;margin-bottom:1rem}
+.cs-title span{color:var(--lavender)}
+.cs-sub{font-size:17px;color:var(--subtext0);max-width:620px;line-height:1.75;margin-bottom:2rem}
+.cs-meta{display:flex;flex-wrap:wrap;gap:1.5rem}
+.cs-meta-item{display:flex;flex-direction:column;gap:2px}
+.cs-meta-label{font-family:var(--mono);font-size:10px;color:var(--overlay0);letter-spacing:0.1em;text-transform:uppercase}
+.cs-meta-value{font-size:13px;color:var(--subtext1);font-weight:500}
+
+/* Pills row */
+.cs-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:2rem}
+.pill{font-family:var(--mono);font-size:11px;padding:4px 12px;border:1px solid var(--surface1);border-radius:3px;color:var(--overlay2);letter-spacing:0.05em}
+.pill.active{border-color:var(--mauve);color:var(--mauve)}
+
+/* Divider */
+.divider{border:none;border-top:1px solid var(--surface0);margin:3rem 0}
+
+/* Phase cards */
+.phases{display:flex;flex-direction:column;gap:2rem}
+.phase-card{background:var(--mantle);border:1px solid var(--surface0);border-radius:8px;padding:2rem;position:relative;overflow:hidden}
+.phase-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--mauve);border-radius:3px 0 0 3px}
+.phase-num{font-family:var(--mono);font-size:10px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem}
+.phase-title{font-size:20px;font-weight:600;color:var(--text);margin-bottom:1rem}
+.phase-body{font-size:15px;color:var(--subtext1);line-height:1.8}
+.phase-body p{margin-bottom:0.8rem}
+.phase-body p:last-child{margin-bottom:0}
+
+/* Callout block */
+.callout{background:rgba(203,166,247,0.07);border:1px solid rgba(203,166,247,0.25);border-radius:6px;padding:1.5rem 1.75rem;margin:2.5rem 0}
+.callout-label{font-family:var(--mono);font-size:10px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.6rem}
+.callout p{font-size:15px;color:var(--subtext1);line-height:1.75}
+
+/* Section headers within body */
+.sec-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem;margin-top:3rem}
+.sec-title{font-size:clamp(24px,3vw,32px);font-weight:600;color:var(--text);letter-spacing:-0.02em;margin-bottom:1.5rem}
+
+.body-text{font-size:16px;color:var(--subtext1);line-height:1.85}
+.body-text p{margin-bottom:1.2rem}
+.body-text p:last-child{margin-bottom:0}
+
+/* Reference block */
+.ref-block{background:var(--mantle);border:1px solid var(--surface0);border-radius:6px;padding:1.5rem;margin-top:3rem}
+.ref-label{font-family:var(--mono);font-size:10px;color:var(--overlay0);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem}
+.ref-item{font-size:13px;color:var(--overlay1);line-height:1.7}
+.ref-item a{color:var(--blue);text-decoration:none}
+.ref-item a:hover{color:var(--lavender)}
+
+footer{border-top:1px solid var(--surface0);padding:2rem;text-align:center;margin-top:4rem}
+footer p{font-family:var(--mono);font-size:11px;color:var(--overlay0);letter-spacing:0.05em}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:768px){
+  .nav-links{gap:1rem}
+  .cs-meta{gap:1rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">mason@good:~$</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">about</a></li>
+      <li><a href="index.html#experience">experience</a></li>
+      <li><a href="index.html#skills">skills</a></li>
+      <li><a href="index.html#education">education</a></li>
+      <li><a href="index.html#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="cs-hero">
+    <a href="index.html" class="cs-back">← back to portfolio</a>
+    <div class="cs-tag">// case study — LIS 4934</div>
+    <h1 class="cs-title">Managing a <span>Software Database</span><br>for an Educational Institution</h1>
+    <p class="cs-sub">A project implementation plan for a comprehensive software-tracking database at the University of South Florida, guided by Baars's (2006) six-phase project management framework.</p>
+    <div class="cs-meta">
+      <div class="cs-meta-item">
+        <span class="cs-meta-label">Author</span>
+        <span class="cs-meta-value">Mason Good</span>
+      </div>
+      <div class="cs-meta-item">
+        <span class="cs-meta-label">Course</span>
+        <span class="cs-meta-value">LIS 4934</span>
+      </div>
+      <div class="cs-meta-item">
+        <span class="cs-meta-label">Date</span>
+        <span class="cs-meta-value">June 7, 2026</span>
+      </div>
+      <div class="cs-meta-item">
+        <span class="cs-meta-label">Institution</span>
+        <span class="cs-meta-value">University of South Florida</span>
+      </div>
+    </div>
+    <div class="cs-pills">
+      <span class="pill active">Project Management</span>
+      <span class="pill active">Database Design</span>
+      <span class="pill active">ITSM</span>
+      <span class="pill">PostgreSQL</span>
+      <span class="pill">Software Asset Management</span>
+      <span class="pill">Active Directory</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Introduction -->
+  <div class="body-text">
+    <p>Colleges and universities grow increasingly dependent on software across every academic and administrative function — the need for systematic software asset management has never been more critical. From Office 365 to virtual machines, as technology continues to expand so does its use in higher education. With the continued adoption of new software, institutions need a real solution to managing it all.</p>
+    <p>A comprehensive software-tracking database enables an institution's IT department to monitor software types, vendors, versions, licensing agreements, departmental usage, and individual installation records. That's all essential information for compliance, cost management, and security. The following plan outlines the development of such a database for the University of South Florida (USF) — a large public institution with approximately 50,000 students and 16,000 employees across campuses in Tampa, St. Petersburg, and Sarasota-Manatee. The database will be built and maintained by USF's central IT department, guided by the six-phase project management model described in Baars (2006).</p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Phases -->
+  <div class="sec-label">// the six-phase framework</div>
+  <h2 class="sec-title">Implementation Plan.</h2>
+
+  <div class="phases">
+
+    <div class="phase-card">
+      <div class="phase-num">// phase 01</div>
+      <div class="phase-title">Initiation</div>
+      <div class="phase-body">
+        <p>The initiation phase can begin only once a CIO has decided the institution needs a solution to its software management issues. Typically, a project manager is assigned to develop and map out a project proposal addressing the project's necessity, feasibility, stakeholder involvement, and scope.</p>
+        <p>Key activities include not just drafting the proposal, but ensuring all required parties are involved: legal, procurement, finance, IT leadership, and staff. The proposal must be approved by all parties against five key factors, according to Baars (2006): time, money, quality, organization, and information — all to ensure a detailed plan going into the definition phase.</p>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-num">// phase 02</div>
+      <div class="phase-title">Definition</div>
+      <div class="phase-body">
+        <p>The definition phase allows the team to review the project proposal one last time and make necessary adjustments before moving to design. As Baars (2006) notes, requirements overlooked at this stage become costly to implement later.</p>
+        <p>To ensure all needs are captured, the PM will lead structured meetings with IT admins, various USF departments, and end users (students and faculty). These sessions document requirements across four key categories: preconditions, functional requirements, operational requirements, and design limitations. A major goal here is also identifying and resolving any conflicting requirements between stakeholder groups before they become a bigger problem downstream. The final deliverable is an approved requirements document that establishes the contractual baseline for the rest of the project (Baars, 2006).</p>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-num">// phase 03</div>
+      <div class="phase-title">Design</div>
+      <div class="phase-body">
+        <p>With an approved proposal and all requirements gathered, the design phase begins. At this point the team evaluates third-party software management tools that match the criteria — options could include an ITSM solution like HaloITSM, licensing something like Azure DevOps, or building a custom solution from scratch.</p>
+        <p>To build internally, the most practical option would be PostgreSQL, given its JSON support and widespread adoption across modern software infrastructure. Based on the requirements gathered, the database gets built out to house all necessary information: software names, licenses, expiration/renewal dates, assigned users, and more. This would likely require several relational tables. A UI/UX designer would then build a front-end to interact with the database, all hosted internally to eliminate data privacy concerns.</p>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-num">// phase 04</div>
+      <div class="phase-title">Development</div>
+      <div class="phase-body">
+        <p>The development phase prepares all people, tools, and infrastructure needed before building begins. Activities include provisioning the development server, establishing version control, finalizing the work breakdown structure and project plan, and confirming team assignments — two database developers, one front-end developer, one QA analyst, and the project manager.</p>
+        <p>Baars (2006) emphasizes confirming availability commitments from all team members in advance to prevent resource conflicts common in matrix-structured organizations. Project management tooling like Microsoft Project or Smartsheet gives the team a living issue log, action-and-decision list, risk log, and milestone tracking that keeps everything tangible and accountable.</p>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-num">// phase 05</div>
+      <div class="phase-title">Implementation</div>
+      <div class="phase-body">
+        <p>Implementation is the build phase. Developers construct the SQL database schema, followed by front-end development of the IT portal, data migration from existing spreadsheets, and Active Directory integration. The QA analyst conducts unit and integration testing against the approved requirements — including license expiration reporting, multi-department queries, and concurrent user load testing.</p>
+        <p>The project manager tracks progress against the WBS using the five control factors and documents any scope deviations before authorizing changes (Baars, 2006). The phase closes with a formal user acceptance test (UAT) with representative IT staff. The deliverable is a tested, fully functional database that meets all approved requirements.</p>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-num">// phase 06</div>
+      <div class="phase-title">Follow-Up</div>
+      <div class="phase-body">
+        <p>The follow-up phase formally closes the project. Activities include producing a system administration guide and user manual, conducting hands-on training for IT staff, establishing a 90-day post-launch support process, and transferring system ownership to the IT Director.</p>
+        <p>A final project report evaluates outcomes against the original control factors. Baars (2006) cautions that follow-up boundaries must be defined clearly upfront to prevent ongoing operational requests from being treated as project work. At 90 days post-launch, responsibility transfers fully to IT operations and future changes are handled through USF's standard change management process.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- Conclusion -->
+  <div class="sec-label">// takeaway</div>
+  <h2 class="sec-title">Why This Framework Works.</h2>
+
+  <div class="body-text">
+    <p>Applying Baars's (2006) six-phase framework to USF's software-tracking database project provides clear structure, formal decision points, and defined deliverables at every stage. This approach directly addresses the failures most commonly experienced in IT projects: scope expansion, vague requirements, and neglected closure — all things I've experienced firsthand.</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">// personal context</div>
+    <p>This isn't purely academic for me. In my day-to-day work building ITSM solutions for enterprise clients, I see exactly what happens when a project skips the definition phase or never properly closes out. The Baars framework maps closely to how I already think about implementation work — you can't build the right thing if you haven't nailed down what "right" means before you start.</p>
+  </div>
+
+  <div class="ref-block">
+    <div class="ref-label">// references</div>
+    <div class="ref-item">Baars, W. (2006, July). <em>Project Management Handbook Version 1.1</em>. DANS – Data Archiving and Networked Services. <a href="http://creativecommons.org/licenses/by-nc-sa/2.5" target="_blank">CC BY-NC-SA 2.5</a></div>
+  </div>
+
+</div>
+
+<footer>
+  <p>mason good · built with intent · florida</p>
+</footer>
+
+</body>
+</html>
