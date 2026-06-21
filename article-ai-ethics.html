@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ethics of Artificial Intelligence — Mason Good</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --base:#1e1e2e;--mantle:#181825;--crust:#11111b;
+    --surface0:#313244;--surface1:#45475a;
+    --overlay0:#6c7086;--overlay1:#7f849c;
+    --subtext0:#a6adc8;--subtext1:#bac2de;--text:#cdd6f4;
+    --lavender:#b4befe;--blue:#89b4fa;--sapphire:#74c7ec;
+    --mauve:#cba6f7;
+    --mono:'IBM Plex Mono',monospace;
+    --sans:'Space Grotesk',sans-serif;
+    --serif:'Lora',serif;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--base);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(30,30,46,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--surface0);padding:0 2rem}
+  .nav-inner{max-width:1100px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:var(--mono);font-size:14px;color:var(--mauve);letter-spacing:0.05em;text-decoration:none}
+  .nav-back{font-family:var(--mono);font-size:12px;color:var(--overlay1);text-decoration:none;letter-spacing:0.03em;transition:color 0.2s}
+  .nav-back:hover{color:var(--lavender)}
+
+  .article-wrap{max-width:720px;margin:0 auto;padding:6rem 2rem 6rem}
+
+  .article-meta{margin-bottom:3rem}
+  .article-tag{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem}
+  .article-title{font-size:clamp(28px,5vw,48px);font-weight:600;color:var(--text);letter-spacing:-0.02em;line-height:1.15;margin-bottom:1.25rem}
+  .article-byline{display:flex;flex-wrap:wrap;gap:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--surface0)}
+  .byline-item{font-family:var(--mono);font-size:11px;color:var(--overlay1);letter-spacing:0.04em}
+  .byline-item span{color:var(--subtext0)}
+
+  .article-body{font-family:var(--serif);font-size:18px;line-height:1.85;color:var(--subtext1)}
+  .article-body p{margin-bottom:1.6rem;text-indent:2em}
+  .article-body p:first-child{text-indent:0}
+
+  .article-refs{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--surface0)}
+  .refs-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.25rem}
+  .refs-list{list-style:none;display:flex;flex-direction:column;gap:0.75rem}
+  .refs-list li{font-family:var(--mono);font-size:12px;color:var(--overlay1);line-height:1.7;padding-left:2em;text-indent:-2em}
+  .refs-list a{color:var(--sapphire);text-decoration:none}
+  .refs-list a:hover{text-decoration:underline}
+
+  .article-footer{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--surface0);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .author-block{display:flex;align-items:center;gap:1rem}
+  .author-avatar{width:40px;height:40px;background:rgba(203,166,247,0.12);border:1px solid var(--mauve);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--mauve);font-weight:600}
+  .author-name{font-size:14px;font-weight:600;color:var(--text)}
+  .author-role{font-family:var(--mono);font-size:11px;color:var(--overlay1)}
+  .back-link{font-family:var(--mono);font-size:12px;padding:8px 18px;border:1px solid var(--surface1);border-radius:3px;color:var(--subtext1);text-decoration:none;transition:all 0.2s;letter-spacing:0.04em}
+  .back-link:hover{border-color:var(--mauve);color:var(--mauve)}
+
+  footer{border-top:1px solid var(--surface0);padding:2rem;text-align:center}
+  footer p{font-family:var(--mono);font-size:11px;color:var(--overlay0);letter-spacing:0.05em}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">mason@good:~$</a>
+    <a href="index.html#writing" class="nav-back">← back to writing</a>
+  </div>
+</nav>
+
+<main>
+  <article class="article-wrap">
+    <header class="article-meta">
+      <div class="article-tag">// essay · technology ethics</div>
+      <h1 class="article-title">The Ethics of Artificial Intelligence</h1>
+      <div class="article-byline">
+        <span class="byline-item">By <span>Mason Good</span></span>
+        <span class="byline-item">Course <span>LIS4934 — BSIS Senior Capstone, USF</span></span>
+        <span class="byline-item">Instructor <span>Dr. Kiersty Cox</span></span>
+        <span class="byline-item">Date <span>June 21, 2026</span></span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p>AI has become an unescapable part of our daily life, and many scholars and peers are comparing it to the ".com" bubble. As a student, I see massive warnings in all classes saying not to use or cite it if you do. We have political AI-generated smear campaigns and videos. Every large corporation is forcing its employees to use AI even if they don't want to—so much so that tech software engineers are now being performance-based judged on their usage of it. The level of noise, hype, and buzz is nauseating. The hardest part is, you can't talk about it. AI is here, and it's here to stay, but what even is AI? Is it a tool or something sentient? What harm has it caused and what good has come from it? In this essay, I will explore all of these ideas and get to the bottom of what AI is.</p>
+
+      <p>Human fear is almost always rooted in ignorance, the unknown. I hear AI thrown around so much, and as a data scientist, it drives me up a wall. Claude, ChatGPT, Gemini, etc., are not actually even AI. Artificial Intelligence is the ability of a computer to think, reason, problem-solve, learn, and perform tasks typically associated with human intelligence (World Science Festival, 2026). ChatGPT can't even count to 1,000 without failing, which is something most 8-year-old children can do. These machines or systems, in reality, are called Large Language Models (LLMs). To be fair, human language has broadened, so what we refer to nowadays when we say AI is, in fact, an LLM. LLMs are a type of AI that are focused on understanding and generating human language. We have then shifted the definition of the more advanced AI to what is now called AGI or Artificial General Intelligence. AGI is a true human-level intelligence, presumably with its own consciousness, and is often depicted in movies like "I, Robot." I think what people are scared of is AGI, as they should be, but AI as it is today is nothing more than a tool.</p>
+
+      <p>Now that we have cleared up what everyone is calling AI, let's look at what the pros of it are. Without a doubt, the current AI is one of the most advanced software tools humans have ever created. Its pattern recognition in particular is revolutionary and unmatched. There are more possibilities in the game of chess than there are atoms in the observable universe. Chess is an incredibly complex game, one that AI has completely defeated us in. A part of why its pattern recognition is so good is due to the way it learns. You give AI some data, and you have it train on that data; it finds patterns humans would never have the time or cognitive bandwidth to discover. This is why modern medicine has begun using AI to detect cancers in imaging scans faster and more accurately than radiologists working alone (Silva et al., 2023). The tool is extraordinary. It does not think. It does not feel. It recognizes, and it outputs. That distinction matters enormously when society starts asking whether AI deserves legal standing (Harvard Business School, 2024).</p>
+
+      <p>Treating AI as a tool does not mean pretending it is harmless. The immediate harms are real and well-documented. Algorithmic bias is perhaps the most insidious one. Because AI learns from historical human data, it also learns historical human prejudices. Hiring algorithms trained on decades of corporate résumés have been shown to systematically downgrade women and minorities because past hiring patterns were themselves discriminatory (Chen, 2023). You feed the machine biased data, you get biased decisions, only now those decisions arrive at scale and with a veneer of scientific objectivity that makes them harder to challenge. Preventing this requires diverse training datasets, built-in fairness audits, and critically, human review of consequential AI outputs. This is not a hypothetical future risk; it is happening now. Responsible AI governance has to include mandatory energy-efficiency standards for data centers, incentives for renewable-powered infrastructure, and honest corporate disclosure about the environmental footprint of AI products (Nutt, 2025). The same corporations racing to deploy AI should be required to account for every megawatt-hour it costs (Harari, 2026).</p>
+
+      <p>Perhaps the most personal concern I have with AI's proliferation is what it does to us. Not in a science-fiction sense, but in a slow, mundane sense. Brendan, founder of the Cosmos Institute, describes the risk as the atrophy of our "deliberative muscle" (World Knowledge Forum, 2025). If I use AI to decide what to eat, how to respond to an email, what to think about a political issue, I am not just saving time; I am outsourcing the cognitive labor that actually makes me a reasoning person (Gerlich, 2025). We have movies like "WALL-E" that depict the scenario of what will happen to complacent, lazy humans, and it's not a pretty picture.</p>
+
+      <p>I want to be careful here not to be a hypocrite. I use AI tools all the time at work, mainly for coding help or deep research. The point is not abstinence; the point is intentionality. There is a meaningful difference between using AI to format a reference list and using AI to decide what I believe about a political issue. The former is a clerical task. The latter is the substance of being a thinking, breathing human. Society should draw that line institutionally as well. Schools should teach students how to evaluate AI outputs, not just how to prompt them. Workplaces should preserve space for independent human judgment, especially in decisions that affect other people's lives. And individuals should develop the habit of asking, before they offload a decision to an AI, whether that decision is actually one they should be making themselves (Gerlich, 2025).</p>
+
+      <p>The ethics of AI are not a distant philosophical puzzle. They are showing up in hiring decisions, in political ads, in energy bills, and in classroom policies right now. AI, as it exists today, is a tool, not a legal person, not a moral agent. That means the ethical weight falls entirely on us: the people who build it, regulate it, deploy it, and choose how much of our own thinking to hand over to it. We should govern AI with the same rigor we apply to any powerful technology, with mandatory safety standards, bias audits, environmental accountability, and firm human oversight in high-stakes domains (Institute for Ethics in AI Oxford, 2025). And we should have the self-awareness to recognize when convenience starts to cost us something more important: our capacity to think for ourselves. AI is not the enemy. Complacency is.</p>
+    </div>
+
+    <div class="article-refs">
+      <div class="refs-label">// references</div>
+      <ul class="refs-list">
+        <li>Chen, Z. (2023). Ethics and discrimination in artificial intelligence-enabled recruitment practices. <em>Humanities and Social Sciences Communications, 10</em>(1). <a href="https://doi.org/10.1057/s41599-023-02079-x" target="_blank">https://doi.org/10.1057/s41599-023-02079-x</a></li>
+        <li>Gerlich, M. (2025). AI tools in society: Impacts on cognitive offloading and the future of critical thinking. <em>Societies, 15</em>(1), 6. <a href="https://doi.org/10.3390/soc15010006" target="_blank">https://doi.org/10.3390/soc15010006</a></li>
+        <li>Harari, Y. N. (2026, January 25). An Honest Conversation on AI and Humanity @wef | Yuval Noah Harari [Video]. YouTube. <a href="https://www.youtube.com/watch?v=QiT2yK-5-yg" target="_blank">https://www.youtube.com/watch?v=QiT2yK-5-yg</a></li>
+        <li>Harvard Business School. (2024, November 20). OpenAI CEO Sam Altman on AI governance, ethics, and innovation | A conversation with BiGS [Video]. YouTube. <a href="https://www.youtube.com/watch?v=BZbjqiRvJPA" target="_blank">https://www.youtube.com/watch?v=BZbjqiRvJPA</a></li>
+        <li>Institute for Ethics in AI Oxford. (2025, December 9). Accelerating AI Ethics Podcast: From Philosophy to Code: The Role of the Humanities in the AI Age [Video]. YouTube. <a href="https://www.youtube.com/watch?v=SIhNy40uPrg" target="_blank">https://www.youtube.com/watch?v=SIhNy40uPrg</a></li>
+        <li>Nutt, D. (2025, November 10). 'Roadmap' shows the environmental impact of AI data center boom. <em>Cornell Chronicle.</em> <a href="https://news.cornell.edu/stories/2025/11/roadmap-shows-environmental-impact-ai-data-center-boom" target="_blank">https://news.cornell.edu/stories/2025/11/roadmap-shows-environmental-impact-ai-data-center-boom</a></li>
+        <li>Silva, H. E., Santos, G. N., Leite, A. F., Mesquita, C. R., Figueiredo, P. T., Stefani, C. M., &amp; De Melo, N. S. (2023). The use of artificial intelligence tools in cancer detection compared to the traditional diagnostic imaging methods: An overview of the systematic reviews. <em>PLOS ONE, 18</em>(10), e0292063. <a href="https://doi.org/10.1371/journal.pone.0292063" target="_blank">https://doi.org/10.1371/journal.pone.0292063</a></li>
+        <li>World Knowledge Forum. (2025, January 4). The Ethics of AI | Stuart J. Russell (University of California, Berkeley, Professor) [Video]. YouTube. <a href="https://www.youtube.com/watch?v=KiT0T12Yyno" target="_blank">https://www.youtube.com/watch?v=KiT0T12Yyno</a></li>
+        <li>World Science Festival. (2026, May 15). The Uncomfortable Truth About AI "Reasoning" | World Science Festival [Video]. YouTube. <a href="https://www.youtube.com/watch?v=iFYF_e1GSGI" target="_blank">https://www.youtube.com/watch?v=iFYF_e1GSGI</a></li>
+      </ul>
+    </div>
+
+    <div class="article-footer">
+      <div class="author-block">
+        <div class="author-avatar">MG</div>
+        <div>
+          <div class="author-name">Mason Good</div>
+          <div class="author-role">Implementation Specialist · USF BSIS '26</div>
+        </div>
+      </div>
+      <a href="index.html#writing" class="back-link">← all writing</a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <p>mason good · built with intent · florida</p>
+</footer>
+
+</body>
+</html>

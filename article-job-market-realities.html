@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Market Realities for Data Professionals — Mason Good</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --base:#1e1e2e;--mantle:#181825;--crust:#11111b;
+    --surface0:#313244;--surface1:#45475a;
+    --overlay0:#6c7086;--overlay1:#7f849c;
+    --subtext0:#a6adc8;--subtext1:#bac2de;--text:#cdd6f4;
+    --lavender:#b4befe;--blue:#89b4fa;--sapphire:#74c7ec;
+    --mauve:#cba6f7;
+    --mono:'IBM Plex Mono',monospace;
+    --sans:'Space Grotesk',sans-serif;
+    --serif:'Lora',serif;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--base);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(30,30,46,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--surface0);padding:0 2rem}
+  .nav-inner{max-width:1100px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:var(--mono);font-size:14px;color:var(--mauve);letter-spacing:0.05em;text-decoration:none}
+  .nav-back{font-family:var(--mono);font-size:12px;color:var(--overlay1);text-decoration:none;letter-spacing:0.03em;transition:color 0.2s}
+  .nav-back:hover{color:var(--lavender)}
+
+  .article-wrap{max-width:720px;margin:0 auto;padding:6rem 2rem 6rem}
+
+  .article-meta{margin-bottom:3rem}
+  .article-tag{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem}
+  .article-title{font-size:clamp(28px,5vw,48px);font-weight:600;color:var(--text);letter-spacing:-0.02em;line-height:1.15;margin-bottom:1.25rem}
+  .article-byline{display:flex;flex-wrap:wrap;gap:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--surface0)}
+  .byline-item{font-family:var(--mono);font-size:11px;color:var(--overlay1);letter-spacing:0.04em}
+  .byline-item span{color:var(--subtext0)}
+
+  .article-body{font-family:var(--serif);font-size:18px;line-height:1.85;color:var(--subtext1)}
+  .article-body p{margin-bottom:1.6rem;text-indent:2em}
+  .article-body p:first-child{text-indent:0}
+
+  .article-refs{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--surface0)}
+  .refs-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.25rem}
+  .refs-list{list-style:none;display:flex;flex-direction:column;gap:0.75rem}
+  .refs-list li{font-family:var(--mono);font-size:12px;color:var(--overlay1);line-height:1.7;padding-left:2em;text-indent:-2em}
+  .refs-list a{color:var(--sapphire);text-decoration:none}
+  .refs-list a:hover{text-decoration:underline}
+
+  .article-footer{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--surface0);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .author-block{display:flex;align-items:center;gap:1rem}
+  .author-avatar{width:40px;height:40px;background:rgba(203,166,247,0.12);border:1px solid var(--mauve);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--mauve);font-weight:600}
+  .author-name{font-size:14px;font-weight:600;color:var(--text)}
+  .author-role{font-family:var(--mono);font-size:11px;color:var(--overlay1)}
+  .back-link{font-family:var(--mono);font-size:12px;padding:8px 18px;border:1px solid var(--surface1);border-radius:3px;color:var(--subtext1);text-decoration:none;transition:all 0.2s;letter-spacing:0.04em}
+  .back-link:hover{border-color:var(--mauve);color:var(--mauve)}
+
+  footer{border-top:1px solid var(--surface0);padding:2rem;text-align:center}
+  footer p{font-family:var(--mono);font-size:11px;color:var(--overlay0);letter-spacing:0.05em}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">mason@good:~$</a>
+    <a href="index.html#writing" class="nav-back">← back to writing</a>
+  </div>
+</nav>
+
+<main>
+  <article class="article-wrap">
+    <header class="article-meta">
+      <div class="article-tag">// reflection · career development</div>
+      <h1 class="article-title">Job Market Realities for Data Professionals</h1>
+      <div class="article-byline">
+        <span class="byline-item">By <span>Mason Good</span></span>
+        <span class="byline-item">Event <span>Posit PBC Data Science Hangout, June 12, 2026</span></span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p>I attended a virtual career panel hosted on Zoom on June 12th, which was then posted to YouTube. The panel was hosted by Posit PBC, who hold these panels weekly, named "Data Science Hangout" (Posit PBC, 2026). These are fantastic panels for data professionals, and I think tech people in general. This was my event of choice as I am soon to be a fresh grad, working in ITSM consulting, but I want to move into the data science field. What better way to start moving into a field than by listening to experts in that field and hearing their thoughts about it? This last week's panel featured an insane lineup with three industry leaders: Gabriela de Queiroz, founder of R-Ladies and former AI Director at Microsoft; Dan Boisvert, Senior Director and Head of Data Stewardship at Biogen; and Makarand Malu, an experienced data science manager with a background at major enterprise organizations like Google and PayPal. The panel acts as an open forum discussion where everyone in the call can ask any question they'd like to the guest speakers and see what they have to say. The questions varied from AI usage, technical interviews, layoffs, and the future of the job market.</p>
+
+      <p>In today's world, it is impossible to get away from AI, even more so in the tech world. It was interesting, as I found each of the panelists had this mentality that AI is here, it's not going anywhere, and you need to know how to use it. This topic was brought on by a viewer, Gregory Power, asking the panelists' thoughts on generative AI. Boisvert had the most nuanced take, in that he states it is the next evolution in the already existing code spellcheck (Posit PBC, 2026). Malu stated that it's speeding up development cycles and that companies are demanding more in shorter time frames from engineers (Posit PBC, 2026). Finally, we saw de Queiroz, who was the most skeptical about AI usage for its slop and low-quality analysis (Posit PBC, 2026). Overall, it is really scary for me to think about just how much the job market is changing. This technology, known as large language models, is sweeping the tech world in a very negative way. The impression I got from the panelists was the concern in general for sloppy quality, shipping products fast, etc. De Queiroz stated she sees the market headed back to quality control sooner than later, but later is undetermined (Posit PBC, 2026). Personally, it worries me to see companies more focused on quantity and speed; these metrics are very rarely a good thing, as they are almost always at the cost of quality.</p>
+
+      <p>Another very insightful topic that was discussed was brought about by Nor on how to sell yourself to hiring managers and recruiters. I personally have all sorts of skills that my job title might not cover at all, and something that de Queiroz stated really stuck with me. Job titles are just internal to and domain-specific to the companies; if you are doing data science work, you are a data scientist (Posit PBC, 2026). She stated that you can confidently make that statement, as these titles are meaningless. Malu agreed with her and acknowledged that the market is incredibly tough right now, and recruiters are heavily filtering for exact title matches (Posit PBC, 2026). Not just title matches but diploma and experience matches, which can make finding a job right now incredibly difficult. For me, one of the big reasons I got into the tech world is that I always felt that it respected experience over anything else. I still think this is true. However, based on hearing Malu's real-life experience as he hunts for another job, it seems to be less and less true in today's market (Posit PBC, 2026). This again is incredibly worrying, because if you don't pick the right ladder to climb with the right titles, you are out of luck. Not to mention the potential need to go back to school when education costs are at an all-time high.</p>
+
+      <p>As stated above, I am an inspiring data scientist, and I have a lot of data science skills. I am incredibly competent in SQL, R, and Python. I am actively in my role today working on a Power BI project for Bright Horizons, where I'm sifting through 350k rows of ITSM data and making dashboards based on 6 main KPI's. I am doing what data scientists do, but my title is Senior Consultant. So, that job title discussion gave me a lot of hope, in that I can still sell myself as a data scientist even if I have never had that title.</p>
+
+      <p>The biggest overall feeling I got from the panelists was that we are in incredibly turbulent times. The job market is worse and harder than it's ever been, and AI seems more and more likely to continue to cause layoffs. Most of the panelists stated they didn't see the job market going back into hiring mode for another 2-3 years, with the confidence of that varying between the three of them (Posit PBC, 2026). This conversation was genuinely captivating for me as they are talking about the real world, and real-world consequences and challenges they are facing. I do believe there is a lot of hope left. De Queiroz and Malu both seemed to remain incredibly hopeful about the future of data professionals. In general, they emphasized that to be a modern data scientist, you cannot just passively consume data; you have to be actively involved and try to focus on what sorts of value you can continue to bring to organizations (Posit PBC, 2026).</p>
+    </div>
+
+    <div class="article-refs">
+      <div class="refs-label">// references</div>
+      <ul class="refs-list">
+        <li>Posit PBC. (2026, June 12). Job Market Realities for Data Professionals in 2026 | Career Panel | Data Science Hangout. YouTube. <a href="https://www.youtube.com/watch?v=FU829X_WdYE" target="_blank">https://www.youtube.com/watch?v=FU829X_WdYE</a></li>
+      </ul>
+    </div>
+
+    <div class="article-footer">
+      <div class="author-block">
+        <div class="author-avatar">MG</div>
+        <div>
+          <div class="author-name">Mason Good</div>
+          <div class="author-role">Implementation Specialist · USF BSIS '26</div>
+        </div>
+      </div>
+      <a href="index.html#writing" class="back-link">← all writing</a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <p>mason good · built with intent · florida</p>
+</footer>
+
+</body>
+</html>
