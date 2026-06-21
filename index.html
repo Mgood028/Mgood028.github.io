@@ -8,142 +8,380 @@
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
-    --base:#1e1e2e;
-    --mantle:#181825;
-    --crust:#11111b;
-    --surface0:#313244;
-    --surface1:#45475a;
-    --surface2:#585b70;
-    --overlay0:#6c7086;
-    --overlay1:#7f849c;
-    --overlay2:#9399b2;
-    --subtext0:#a6adc8;
-    --subtext1:#bac2de;
-    --text:#cdd6f4;
-    --lavender:#b4befe;
-    --blue:#89b4fa;
-    --sapphire:#74c7ec;
-    --sky:#89dceb;
-    --teal:#94e2d5;
-    --green:#a6e3a1;
-    --yellow:#f9e2af;
-    --peach:#fab387;
-    --maroon:#eba0ac;
-    --red:#f38ba8;
-    --mauve:#cba6f7;
-    --pink:#f5c2e7;
-    --flamingo:#f2cdcd;
-    --rosewater:#f5e0dc;
+    --base:#1e1e2e;--mantle:#181825;--crust:#11111b;
+    --surface0:#313244;--surface1:#45475a;--surface2:#585b70;
+    --overlay0:#6c7086;--overlay1:#7f849c;--overlay2:#9399b2;
+    --subtext0:#a6adc8;--subtext1:#bac2de;--text:#cdd6f4;
+    --lavender:#b4befe;--blue:#89b4fa;--sapphire:#74c7ec;
+    --teal:#94e2d5;--green:#a6e3a1;--yellow:#f9e2af;
+    --peach:#fab387;--mauve:#cba6f7;--pink:#f5c2e7;
     --mono:'IBM Plex Mono',monospace;
     --sans:'Space Grotesk',sans-serif;
   }
+
   html{scroll-behavior:smooth}
   body{background:var(--base);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
 
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(30,30,46,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--surface0);padding:0 2rem}
+  /* ── SCROLL REVEAL ── */
+  .reveal{opacity:0;transform:translateY(32px);transition:opacity 0.65s ease,transform 0.65s ease}
+  .reveal.from-left{transform:translateX(-40px)}
+  .reveal.from-right{transform:translateX(40px)}
+  .reveal.scale-in{transform:scale(0.94);opacity:0}
+  .reveal.visible{opacity:1;transform:none}
+  .reveal-delay-1{transition-delay:0.1s}
+  .reveal-delay-2{transition-delay:0.2s}
+  .reveal-delay-3{transition-delay:0.3s}
+  .reveal-delay-4{transition-delay:0.4s}
+
+  /* ── NAV ── */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(24,24,37,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(49,50,68,0.6);padding:0 2rem;transition:background 0.3s}
   .nav-inner{max-width:1100px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between}
   .nav-logo{font-family:var(--mono);font-size:14px;color:var(--mauve);letter-spacing:0.05em}
   .nav-links{display:flex;gap:2rem;list-style:none}
-  .nav-links a{font-size:13px;color:var(--overlay1);text-decoration:none;font-family:var(--mono);letter-spacing:0.03em;transition:color 0.2s}
-  .nav-links a:hover{color:var(--lavender)}
+  .nav-links a{font-size:12px;color:var(--overlay1);text-decoration:none;font-family:var(--mono);letter-spacing:0.04em;transition:color 0.2s;position:relative;padding-bottom:2px}
+  .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--mauve);transition:width 0.25s}
+  .nav-links a:hover{color:var(--mauve)}
+  .nav-links a:hover::after{width:100%}
 
-  section{max-width:1100px;margin:0 auto;padding:6rem 2rem}
+  /* ── SECTION WRAPPERS ── */
+  .sec-base{background:var(--base)}
+  .sec-mantle{background:var(--mantle)}
+  .sec-crust{background:var(--crust)}
+  .sec-inner{max-width:1100px;margin:0 auto;padding:7rem 2rem}
 
-  .hero{padding-top:10rem;padding-bottom:6rem;position:relative}
-  .hero-tag{font-family:var(--mono);font-size:12px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.6s 0.1s forwards}
-  .hero-name{font-size:clamp(48px,7vw,88px);font-weight:600;color:var(--text);line-height:1;letter-spacing:-0.03em;margin-bottom:1rem;opacity:0;animation:fadeUp 0.6s 0.2s forwards}
-  .hero-name span{color:var(--lavender)}
-  .hero-sub{font-size:clamp(18px,2.5vw,24px);color:var(--subtext0);font-weight:300;margin-bottom:2.5rem;max-width:540px;opacity:0;animation:fadeUp 0.6s 0.3s forwards}
-  .hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:3rem;opacity:0;animation:fadeUp 0.6s 0.4s forwards}
-  .pill{font-family:var(--mono);font-size:11px;padding:4px 12px;border:1px solid var(--surface1);border-radius:3px;color:var(--overlay2);letter-spacing:0.05em}
-  .pill.active{border-color:var(--mauve);color:var(--mauve)}
-  .hero-cta{display:flex;gap:1rem;opacity:0;animation:fadeUp 0.6s 0.5s forwards}
-  .btn{font-family:var(--mono);font-size:12px;padding:10px 24px;border-radius:3px;text-decoration:none;letter-spacing:0.05em;transition:all 0.2s;cursor:pointer;border:none;display:inline-block}
-  .btn-primary{background:var(--mauve);color:var(--crust);font-weight:600}
-  .btn-primary:hover{background:var(--lavender)}
-  .btn-outline{background:transparent;color:var(--mauve);border:1px solid var(--mauve)}
-  .btn-outline:hover{background:rgba(203,166,247,0.1)}
+  /* ── SECTION HEADER ── */
+  .sec-header{margin-bottom:3.5rem}
+  .sec-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.4rem}
+  .sec-title{font-size:clamp(30px,4vw,44px);font-weight:600;color:var(--text);letter-spacing:-0.02em}
 
-  .sec-header{margin-bottom:3rem}
-  .sec-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem}
-  .sec-title{font-size:clamp(28px,4vw,40px);font-weight:600;color:var(--text);letter-spacing:-0.02em}
+  /* ─────────────────────────────────────────
+     HERO
+  ───────────────────────────────────────── */
+  .hero-shell{
+    background:var(--crust);
+    position:relative;overflow:hidden;min-height:100vh;
+    display:flex;align-items:center;
+  }
+  /* animated grid lines */
+  .hero-shell::before{
+    content:'';position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(203,166,247,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(203,166,247,0.04) 1px, transparent 1px);
+    background-size:60px 60px;
+    animation:gridDrift 20s linear infinite;
+  }
+  @keyframes gridDrift{from{background-position:0 0}to{background-position:60px 60px}}
+  /* glow orbs */
+  .hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+  .hero-orb-1{width:500px;height:500px;background:rgba(203,166,247,0.12);top:-100px;left:-150px;animation:orbFloat 8s ease-in-out infinite}
+  .hero-orb-2{width:400px;height:400px;background:rgba(137,180,250,0.08);bottom:-80px;right:-100px;animation:orbFloat 10s ease-in-out infinite reverse}
+  .hero-orb-3{width:300px;height:300px;background:rgba(148,226,213,0.06);top:40%;left:60%;animation:orbFloat 12s ease-in-out infinite 2s}
+  @keyframes orbFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-30px)}}
 
-  /* ABOUT — expanded layout */
-  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-  .about-text{font-size:17px;line-height:1.8;color:var(--subtext1)}
-  .about-text p{margin-bottom:1.2rem}
-  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-  .stat-card{background:var(--mantle);border:1px solid var(--surface0);border-radius:6px;padding:1.5rem}
-  .stat-num{font-family:var(--mono);font-size:32px;font-weight:600;color:var(--lavender);line-height:1}
-  .stat-label{font-size:13px;color:var(--overlay1);margin-top:0.3rem}
+  .hero{position:relative;z-index:1;padding:10rem 2rem 6rem;max-width:1100px;margin:0 auto;width:100%}
+  .hero-tag{font-family:var(--mono);font-size:12px;color:var(--mauve);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:1.75rem;opacity:0;animation:fadeUp 0.7s 0.2s forwards}
+  .hero-name{font-size:clamp(56px,9vw,108px);font-weight:600;line-height:0.95;letter-spacing:-0.04em;margin-bottom:1.25rem;opacity:0;animation:fadeUp 0.7s 0.35s forwards}
+  .hero-name .line1{color:var(--text)}
+  .hero-name .line2{
+    color:transparent;
+    -webkit-text-stroke:2px var(--lavender);
+    display:block;
+  }
+  .hero-sub{font-size:clamp(16px,2vw,20px);color:var(--subtext0);font-weight:300;max-width:500px;line-height:1.75;margin-bottom:3rem;opacity:0;animation:fadeUp 0.7s 0.5s forwards}
+  .hero-pills{display:flex;flex-wrap:wrap;gap:8px;opacity:0;animation:fadeUp 0.7s 0.65s forwards}
+  .pill{font-family:var(--mono);font-size:11px;padding:5px 14px;border:1px solid var(--surface1);border-radius:20px;color:var(--overlay2);letter-spacing:0.05em;transition:all 0.2s;cursor:default}
+  .pill.active{border-color:var(--mauve);color:var(--mauve);background:rgba(203,166,247,0.08)}
 
-  /* Coursework highlight strip */
-  .about-coursework{margin-top:3rem;padding:2rem;background:var(--mantle);border:1px solid var(--surface0);border-radius:8px}
-  .about-coursework-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem}
-  .course-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0.75rem}
-  .course-item{background:var(--surface0);border-radius:4px;padding:0.85rem 1rem}
-  .course-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:0.25rem}
-  .course-detail{font-size:12px;color:var(--overlay1);line-height:1.5}
+  /* scroll cue */
+  .hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:fadeUp 0.7s 1s forwards}
+  .hero-scroll span{font-family:var(--mono);font-size:10px;color:var(--overlay0);letter-spacing:0.1em;text-transform:uppercase}
+  .scroll-line{width:1px;height:40px;background:linear-gradient(var(--mauve),transparent);animation:scrollPulse 2s ease-in-out infinite}
+  @keyframes scrollPulse{0%,100%{opacity:0.3;transform:scaleY(0.8)}50%{opacity:1;transform:scaleY(1)}}
 
-  /* Career goals callout */
-  .about-goals{margin-top:2rem;border-left:3px solid var(--mauve);padding-left:1.5rem}
-  .about-goals-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem}
-  .about-goals p{font-size:15px;color:var(--subtext0);line-height:1.75;margin-bottom:0.75rem}
-  .about-goals p:last-child{margin-bottom:0}
-  .goals-certs{display:flex;flex-wrap:wrap;gap:6px;margin-top:0.75rem}
-  .goals-cert-tag{font-family:var(--mono);font-size:10px;padding:3px 10px;background:rgba(203,166,247,0.1);border:1px solid var(--mauve);border-radius:3px;color:var(--mauve);letter-spacing:0.04em}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-  .exp-list{display:flex;flex-direction:column}
-  .exp-item{display:grid;grid-template-columns:200px 1fr;gap:2rem;padding:2.5rem 0;border-bottom:1px solid var(--surface0);position:relative}
+  /* ─────────────────────────────────────────
+     ABOUT  — big split layout
+  ───────────────────────────────────────── */
+  .about-layout{display:grid;grid-template-columns:1.1fr 0.9fr;gap:5rem;align-items:start}
+  .about-text{font-size:16px;line-height:1.9;color:var(--subtext1)}
+  .about-text p{margin-bottom:1.25rem}
+
+  .about-goals{margin-top:2.5rem;padding:1.75rem;background:rgba(203,166,247,0.05);border:1px solid rgba(203,166,247,0.15);border-radius:10px}
+  .about-goals-label{font-family:var(--mono);font-size:10px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem}
+  .about-goals p{font-size:14px;color:var(--subtext0);line-height:1.75;margin-bottom:0.75rem}
+  .about-goals p:last-of-type{margin-bottom:1rem}
+  .goals-certs{display:flex;flex-wrap:wrap;gap:6px}
+  .goals-cert-tag{font-family:var(--mono);font-size:10px;padding:3px 10px;background:rgba(203,166,247,0.08);border:1px solid rgba(203,166,247,0.25);border-radius:20px;color:var(--mauve);letter-spacing:0.04em}
+
+  /* stat cards — stacked on right */
+  .about-right{display:flex;flex-direction:column;gap:1.25rem}
+  .stat-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .stat-card{
+    background:var(--base);border:1px solid var(--surface0);
+    border-radius:10px;padding:1.5rem 1.25rem;
+    position:relative;overflow:hidden;
+    transition:border-color 0.2s,transform 0.2s;
+  }
+  .stat-card:hover{border-color:var(--surface2);transform:translateY(-2px)}
+  .stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--mauve),transparent)}
+  .stat-num{font-family:var(--mono);font-size:38px;font-weight:600;color:var(--lavender);line-height:1}
+  .stat-label{font-size:12px;color:var(--overlay1);margin-top:0.35rem;letter-spacing:0.02em}
+
+  /* coursework — horizontal scroll feel */
+  .about-coursework{margin-top:4rem}
+  .about-coursework-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.25rem}
+  .course-items{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--surface0);border-radius:10px;overflow:hidden;border:1px solid var(--surface0)}
+  .course-item{background:var(--base);padding:1.25rem;transition:background 0.2s}
+  .course-item:hover{background:var(--mantle)}
+  .course-num{font-family:var(--mono);font-size:28px;font-weight:600;color:rgba(180,190,254,0.15);line-height:1;margin-bottom:0.5rem}
+  .course-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:0.4rem}
+  .course-detail{font-size:12px;color:var(--overlay1);line-height:1.55}
+
+  /* ─────────────────────────────────────────
+     EXPERIENCE — timeline feel
+  ───────────────────────────────────────── */
+  .exp-list{display:flex;flex-direction:column;gap:0}
+  .exp-item{
+    display:grid;grid-template-columns:160px 1fr;gap:3rem;
+    padding:3rem 0;border-bottom:1px solid var(--surface0);
+    position:relative;
+  }
   .exp-item:first-child{border-top:1px solid var(--surface0)}
-  .exp-meta{padding-top:2px}
-  .exp-period{font-family:var(--mono);font-size:11px;color:var(--overlay0);letter-spacing:0.05em;margin-bottom:0.4rem}
-  .exp-company{font-size:13px;color:var(--sapphire);font-weight:500}
-  .exp-title{font-size:18px;font-weight:600;color:var(--text);margin-bottom:0.3rem}
-  .exp-location{font-family:var(--mono);font-size:11px;color:var(--overlay0);margin-bottom:1rem}
-  .exp-bullets{list-style:none;margin-bottom:1rem}
-  .exp-bullets li{padding-left:1.2rem;position:relative;margin-bottom:0.4rem;font-size:14px;color:var(--subtext1)}
-  .exp-bullets li::before{content:'›';position:absolute;left:0;color:var(--mauve)}
-  .exp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:0.8rem}
-  .tag{font-family:var(--mono);font-size:10px;padding:3px 10px;background:var(--surface0);border:1px solid var(--surface1);border-radius:3px;color:var(--overlay2);letter-spacing:0.04em}
+  /* timeline dot */
+  .exp-item::before{
+    content:'';position:absolute;
+    left:155px;top:3.5rem;
+    width:10px;height:10px;
+    border-radius:50%;background:var(--surface1);
+    border:2px solid var(--base);
+    transition:background 0.3s,box-shadow 0.3s;
+    z-index:1;
+  }
+  .exp-item:hover::before{background:var(--mauve);box-shadow:0 0 12px rgba(203,166,247,0.5)}
+  /* timeline line */
+  .exp-item::after{
+    content:'';position:absolute;
+    left:159px;top:0;bottom:0;width:1px;
+    background:var(--surface0);
+    z-index:0;
+  }
+  .exp-item:first-child::after{top:3.5rem}
+  .exp-item:last-child::after{bottom:calc(100% - 3.5rem - 10px)}
 
-  .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
-  .skill-group{background:var(--mantle);border:1px solid var(--surface0);border-radius:6px;padding:1.5rem}
-  .skill-group-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem}
-  .skill-items{display:flex;flex-wrap:wrap;gap:6px}
-  .skill-badge{font-size:12px;padding:4px 10px;background:var(--surface0);border:1px solid var(--surface1);border-radius:3px;color:var(--subtext1)}
+  .exp-meta{padding-top:0.1rem;position:relative;z-index:1}
+  .exp-period{font-family:var(--mono);font-size:10px;color:var(--overlay0);letter-spacing:0.05em;margin-bottom:0.5rem;line-height:1.5}
+  .exp-company{font-size:12px;color:var(--sapphire);font-weight:600;letter-spacing:0.02em;text-transform:uppercase}
 
-  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-  .edu-card{background:var(--mantle);border:1px solid var(--surface0);border-radius:6px;padding:1.75rem}
-  .edu-school{font-size:16px;font-weight:600;color:var(--text);margin-bottom:0.2rem}
-  .edu-degree{font-size:13px;color:var(--blue);margin-bottom:0.4rem}
+  .exp-body{position:relative;z-index:1}
+  .exp-title{font-size:20px;font-weight:600;color:var(--text);margin-bottom:0.2rem;letter-spacing:-0.01em}
+  .exp-location{font-family:var(--mono);font-size:11px;color:var(--overlay0);margin-bottom:1.25rem}
+  .exp-bullets{list-style:none}
+  .exp-bullets li{padding-left:1.25rem;position:relative;margin-bottom:0.5rem;font-size:14px;color:var(--subtext1);line-height:1.65}
+  .exp-bullets li::before{content:'›';position:absolute;left:0;color:var(--mauve);font-size:16px;line-height:1.4}
+  .exp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:1.25rem}
+  .tag{font-family:var(--mono);font-size:10px;padding:3px 11px;background:rgba(49,50,68,0.5);border:1px solid var(--surface1);border-radius:20px;color:var(--overlay2);letter-spacing:0.04em}
+
+  /* ─────────────────────────────────────────
+     SKILLS — large feature layout
+  ───────────────────────────────────────── */
+  .skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+  .skill-group{
+    background:var(--base);border:1px solid var(--surface0);
+    border-radius:12px;padding:2rem;
+    position:relative;overflow:hidden;
+    transition:border-color 0.25s,transform 0.25s;
+  }
+  .skill-group:hover{transform:translateY(-3px)}
+  .skill-group:nth-child(1){border-color:rgba(203,166,247,0.2)}
+  .skill-group:nth-child(2){border-color:rgba(116,199,236,0.2)}
+  .skill-group:nth-child(3){border-color:rgba(148,226,213,0.2)}
+  .skill-group:nth-child(4){border-color:rgba(250,179,135,0.2)}
+  .skill-group:nth-child(1):hover{border-color:var(--mauve)}
+  .skill-group:nth-child(2):hover{border-color:var(--sapphire)}
+  .skill-group:nth-child(3):hover{border-color:var(--teal)}
+  .skill-group:nth-child(4):hover{border-color:var(--peach)}
+  /* big background number */
+  .skill-group-bg{
+    position:absolute;right:-10px;top:-10px;
+    font-family:var(--mono);font-size:120px;font-weight:600;
+    line-height:1;color:rgba(255,255,255,0.02);
+    pointer-events:none;user-select:none;
+  }
+  .skill-group-label{
+    font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;margin-bottom:1.25rem;font-weight:600;
+  }
+  .skill-group:nth-child(1) .skill-group-label{color:var(--mauve)}
+  .skill-group:nth-child(2) .skill-group-label{color:var(--sapphire)}
+  .skill-group:nth-child(3) .skill-group-label{color:var(--teal)}
+  .skill-group:nth-child(4) .skill-group-label{color:var(--peach)}
+  .skill-items{display:flex;flex-wrap:wrap;gap:7px}
+  .skill-badge{font-size:12px;padding:5px 12px;background:rgba(49,50,68,0.6);border:1px solid var(--surface1);border-radius:6px;color:var(--subtext1);transition:all 0.2s}
+  .skill-group:nth-child(1) .skill-badge:hover{border-color:var(--mauve);color:var(--mauve);background:rgba(203,166,247,0.08)}
+  .skill-group:nth-child(2) .skill-badge:hover{border-color:var(--sapphire);color:var(--sapphire);background:rgba(116,199,236,0.08)}
+  .skill-group:nth-child(3) .skill-badge:hover{border-color:var(--teal);color:var(--teal);background:rgba(148,226,213,0.08)}
+  .skill-group:nth-child(4) .skill-badge:hover{border-color:var(--peach);color:var(--peach);background:rgba(250,179,135,0.08)}
+
+  /* ─────────────────────────────────────────
+     EDUCATION
+  ───────────────────────────────────────── */
+  .edu-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+  .edu-degrees{display:flex;flex-direction:column;gap:1rem}
+  .edu-card{
+    background:var(--mantle);border:1px solid var(--surface0);
+    border-radius:10px;padding:1.75rem;
+    position:relative;overflow:hidden;
+    transition:border-color 0.2s;
+  }
+  .edu-card:hover{border-color:var(--blue)}
+  .edu-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--sapphire))}
+  .edu-school{font-size:16px;font-weight:600;color:var(--text);margin-bottom:0.3rem}
+  .edu-degree{font-size:13px;color:var(--blue);margin-bottom:0.5rem;line-height:1.4}
   .edu-detail{font-family:var(--mono);font-size:11px;color:var(--overlay0)}
-  .cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
-  .cert-card{background:var(--mantle);border:1px solid var(--mauve);border-radius:6px;padding:1.5rem;display:flex;gap:1rem;align-items:flex-start}
-  .cert-icon{width:36px;height:36px;background:rgba(203,166,247,0.12);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--mono);font-size:10px;color:var(--mauve);font-weight:600}
+
+  .edu-certs{display:flex;flex-direction:column;gap:1rem}
+  .edu-certs-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.25rem}
+  .cert-card{
+    background:var(--mantle);border:1px solid var(--surface0);
+    border-radius:10px;padding:1.5rem;
+    display:flex;gap:1.25rem;align-items:flex-start;
+    position:relative;overflow:hidden;
+    transition:border-color 0.2s,transform 0.2s;
+  }
+  .cert-card:hover{border-color:var(--mauve);transform:translateX(4px)}
+  .cert-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(var(--mauve),var(--lavender))}
+  .cert-icon{width:40px;height:40px;background:rgba(203,166,247,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--mono);font-size:10px;color:var(--mauve);font-weight:600;border:1px solid rgba(203,166,247,0.2)}
   .cert-name{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.2rem}
   .cert-issuer{font-size:12px;color:var(--overlay1)}
-  .cert-exp{font-family:var(--mono);font-size:10px;color:var(--mauve);margin-top:0.3rem}
+  .cert-exp{font-family:var(--mono);font-size:10px;color:var(--mauve);margin-top:0.35rem}
 
-  .contact-inner{background:var(--mantle);border:1px solid var(--surface0);border-radius:8px;padding:3rem;text-align:center}
-  .contact-title{font-size:clamp(24px,3vw,36px);font-weight:600;color:var(--text);margin-bottom:0.75rem}
-  .contact-sub{font-size:16px;color:var(--subtext0);margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto}
-  .contact-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
-  .contact-link{font-family:var(--mono);font-size:12px;padding:10px 20px;border:1px solid var(--surface1);border-radius:3px;color:var(--subtext1);text-decoration:none;transition:all 0.2s;letter-spacing:0.04em}
-  .contact-link:hover{border-color:var(--mauve);color:var(--mauve)}
+  /* ─────────────────────────────────────────
+     BLOGS — big cards
+  ───────────────────────────────────────── */
+  .blogs-intro{font-size:16px;color:var(--subtext0);margin-bottom:2.5rem;max-width:540px;line-height:1.8}
+  .blogs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+  .blog-card{
+    border-radius:12px;padding:2rem;
+    text-decoration:none;
+    transition:transform 0.25s,box-shadow 0.25s;
+    display:flex;flex-direction:column;gap:0.75rem;
+    position:relative;overflow:hidden;
+    min-height:220px;
+  }
+  .blog-card::before{
+    content:'';position:absolute;inset:0;
+    opacity:0.07;transition:opacity 0.3s;
+  }
+  .blog-card:hover{transform:translateY(-5px)}
+  .blog-card:hover::before{opacity:0.12}
+
+  .blog-card-prog{background:rgba(203,166,247,0.06);border:1px solid rgba(203,166,247,0.2)}
+  .blog-card-prog::before{background:radial-gradient(circle at top left,var(--mauve),transparent 70%)}
+  .blog-card-prog:hover{box-shadow:0 16px 40px rgba(203,166,247,0.12);border-color:rgba(203,166,247,0.4)}
+
+  .blog-card-viz{background:rgba(116,199,236,0.06);border:1px solid rgba(116,199,236,0.2)}
+  .blog-card-viz::before{background:radial-gradient(circle at top left,var(--sapphire),transparent 70%)}
+  .blog-card-viz:hover{box-shadow:0 16px 40px rgba(116,199,236,0.12);border-color:rgba(116,199,236,0.4)}
+
+  .blog-card-think{background:rgba(250,179,135,0.06);border:1px solid rgba(250,179,135,0.2)}
+  .blog-card-think::before{background:radial-gradient(circle at top left,var(--peach),transparent 70%)}
+  .blog-card-think:hover{box-shadow:0 16px 40px rgba(250,179,135,0.12);border-color:rgba(250,179,135,0.4)}
+
+  .blog-card-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;position:relative}
+  .blog-card-prog .blog-card-eyebrow{color:var(--mauve)}
+  .blog-card-viz .blog-card-eyebrow{color:var(--sapphire)}
+  .blog-card-think .blog-card-eyebrow{color:var(--peach)}
+  .blog-card-title{font-size:18px;font-weight:600;color:var(--text);line-height:1.3;position:relative}
+  .blog-card-desc{font-size:13px;color:var(--subtext0);line-height:1.65;flex:1;position:relative}
+  .blog-card-link{font-family:var(--mono);font-size:11px;color:var(--overlay2);position:relative;transition:color 0.2s;margin-top:auto}
+  .blog-card-prog:hover .blog-card-link{color:var(--mauve)}
+  .blog-card-viz:hover .blog-card-link{color:var(--sapphire)}
+  .blog-card-think:hover .blog-card-link{color:var(--peach)}
+
+  /* ─────────────────────────────────────────
+     WRITING
+  ───────────────────────────────────────── */
+  .writing-intro{font-size:16px;color:var(--subtext0);margin-bottom:2rem;max-width:540px;line-height:1.8}
+  .writing-list{display:flex;flex-direction:column;gap:1px;border-radius:12px;overflow:hidden;border:1px solid var(--surface0)}
+  .writing-item{
+    display:grid;grid-template-columns:1fr 80px;align-items:center;gap:2rem;
+    padding:1.75rem 2rem;
+    background:var(--mantle);
+    border-bottom:1px solid var(--surface0);
+    text-decoration:none;
+    transition:background 0.2s,padding-left 0.2s;
+    position:relative;
+  }
+  .writing-item:last-child{border-bottom:none}
+  .writing-item::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;
+    width:3px;opacity:0;transition:opacity 0.2s;
+  }
+  .writing-item:nth-child(1)::before{background:linear-gradient(var(--sapphire),var(--teal))}
+  .writing-item:nth-child(2)::before{background:linear-gradient(var(--mauve),var(--lavender))}
+  .writing-item:nth-child(3)::before{background:linear-gradient(var(--peach),var(--yellow))}
+  .writing-item:hover{background:rgba(49,50,68,0.5);padding-left:2.5rem}
+  .writing-item:hover::before{opacity:1}
+  .writing-item-category{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem}
+  .writing-item:nth-child(1) .writing-item-category{color:var(--sapphire)}
+  .writing-item:nth-child(2) .writing-item-category{color:var(--mauve)}
+  .writing-item:nth-child(3) .writing-item-category{color:var(--peach)}
+  .writing-item-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:0.3rem}
+  .writing-item-desc{font-size:13px;color:var(--overlay1);line-height:1.55}
+  .writing-item-right{text-align:right}
+  .writing-item-date{font-family:var(--mono);font-size:10px;color:var(--overlay0);margin-bottom:0.5rem;white-space:nowrap}
+  .writing-item-arrow{font-size:18px;color:var(--overlay2);display:block;transition:transform 0.2s,color 0.2s}
+  .writing-item:hover .writing-item-arrow{transform:translateX(4px)}
+  .writing-item:nth-child(1):hover .writing-item-arrow{color:var(--sapphire)}
+  .writing-item:nth-child(2):hover .writing-item-arrow{color:var(--mauve)}
+  .writing-item:nth-child(3):hover .writing-item-arrow{color:var(--peach)}
+
+  /* ─────────────────────────────────────────
+     CONTACT
+  ───────────────────────────────────────── */
+  .contact-shell{
+    position:relative;overflow:hidden;
+    background:var(--crust);
+    border-top:1px solid var(--surface0);
+  }
+  .contact-shell::before{
+    content:'';position:absolute;
+    top:50%;left:50%;transform:translate(-50%,-50%);
+    width:800px;height:400px;
+    background:radial-gradient(ellipse,rgba(203,166,247,0.07) 0%,transparent 60%);
+    pointer-events:none;
+  }
+  .contact-inner{position:relative;z-index:1;text-align:center;padding:7rem 2rem}
+  .contact-title{font-size:clamp(28px,4vw,48px);font-weight:600;color:var(--text);margin-bottom:0.75rem;letter-spacing:-0.02em}
+  .contact-sub{font-size:16px;color:var(--subtext0);margin-bottom:3rem;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.75}
+  .contact-links{display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap}
+  .contact-link{font-family:var(--mono);font-size:12px;padding:10px 20px;border:1px solid var(--surface1);border-radius:8px;color:var(--subtext1);text-decoration:none;transition:all 0.2s;letter-spacing:0.04em}
+  .contact-link:hover{border-color:var(--mauve);color:var(--mauve);background:rgba(203,166,247,0.07)}
   .contact-link.primary{background:var(--mauve);color:var(--crust);border-color:var(--mauve);font-weight:600}
-  .contact-link.primary:hover{background:var(--lavender);border-color:var(--lavender)}
+  .contact-link.primary:hover{background:var(--lavender);border-color:var(--lavender);color:var(--crust)}
 
-  footer{border-top:1px solid var(--surface0);padding:2rem;text-align:center}
-  footer p{font-family:var(--mono);font-size:11px;color:var(--overlay0);letter-spacing:0.05em}
+  /* ── FOOTER ── */
+  footer{background:var(--crust);border-top:1px solid var(--surface0);padding:1.75rem 2rem;text-align:center}
+  footer p{font-family:var(--mono);font-size:11px;color:var(--overlay0);letter-spacing:0.06em}
 
-  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-
-  @media(max-width:768px){
-    .about-grid,.edu-grid,.cert-grid,.exp-item{grid-template-columns:1fr}
-    .exp-item{gap:0.5rem}
-    .nav-links{gap:1rem}
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    .about-layout,.edu-layout{grid-template-columns:1fr}
+    .skills-layout{grid-template-columns:1fr 1fr}
+    .blogs-grid{grid-template-columns:1fr}
     .course-items{grid-template-columns:1fr 1fr}
+    .exp-item{grid-template-columns:1fr;gap:0.5rem}
+    .exp-item::before,.exp-item::after{display:none}
+  }
+  @media(max-width:640px){
+    .skills-layout,.stat-row{grid-template-columns:1fr}
+    .edu-grid,.cert-grid{grid-template-columns:1fr}
+    .nav-links{gap:1rem}
+    .course-items{grid-template-columns:1fr}
+    .writing-item{padding-left:1.25rem}
+    .writing-item:hover{padding-left:1.75rem}
   }
 </style>
 </head>
@@ -157,239 +395,342 @@
       <li><a href="#experience">experience</a></li>
       <li><a href="#skills">skills</a></li>
       <li><a href="#education">education</a></li>
-      <li><a href="case-study-software-db.html">projects</a></li>
-     <li><a href="#contact">contact</a></li>
+      <li><a href="#blogs">blogs</a></li>
+      <li><a href="#writing">writing</a></li>
+      <li><a href="#contact">contact</a></li>
     </ul>
   </div>
 </nav>
 
 <main>
-  <section class="hero" id="home">
-    <div class="hero-tag">// IT consultant & implementation specialist</div>
-    <h1 class="hero-name">Mason<br><span>Good.</span></h1>
-    <p class="hero-sub">Building enterprise ITSM solutions, writing SQL that actually works, and staying curious about everything in between.</p>
-    <div class="hero-pills">
-      <span class="pill active">HaloITSM</span>
-      <span class="pill active">SQL</span>
-      <span class="pill active">REST APIs</span>
-      <span class="pill">ITIL Certified</span>
-      <span class="pill">CompTIA A+</span>
-      <span class="pill">Python</span>
-      <span class="pill">R</span>
-      <span class="pill">Active Directory</span>
+
+  <!-- ── HERO ── -->
+  <div class="hero-shell">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero" id="home">
+      <div class="hero-tag">// IT consultant & implementation specialist</div>
+      <h1 class="hero-name">
+        <span class="line1">Mason</span>
+        <span class="line2">Good.</span>
+      </h1>
+      <p class="hero-sub">Building enterprise ITSM solutions, writing SQL that actually works, and staying curious about everything in between.</p>
+      <div class="hero-pills">
+        <span class="pill active">HaloITSM</span>
+        <span class="pill active">SQL</span>
+        <span class="pill active">REST APIs</span>
+        <span class="pill">ITIL Certified</span>
+        <span class="pill">CompTIA A+</span>
+        <span class="pill">Python</span>
+        <span class="pill">R</span>
+        <span class="pill">Active Directory</span>
+      </div>
     </div>
-
-  </section>
-
-  <section id="about">
-    <div class="sec-header">
-      <div class="sec-label">// 01 — about</div>
-      <h2 class="sec-title">Who I am.</h2>
+    <div class="hero-scroll">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
     </div>
-    <div class="about-grid">
-      <div class="about-text">
-        <p>My name is Mason Good and I'm based in Tampa, Florida. I'm completing my degree in Information Systems at USF with a focus on data science. Since as early as I can remember I was engrossed in technology — helping my mom fix the cords on the VHS and DVD players, that kind of thing. That curiosity never went away.</p>
-        <p>It led me to video games, then to IT, and eventually down the data science path. I love knowledge and I love learning, and data science is all about information. That pull has only grown stronger as my career has progressed.</p>
-        <p>My journey started at Best Buy's Geek Squad, where I learned that great IT isn't just about fixing things — it's about understanding people's needs. That foundation led me through infrastructure management at a credit union, and now to Process Panda, where I build custom ITSM solutions for enterprise clients like Perdue Farms and the City of San Jose.</p>
+  </div>
 
-        <div class="about-goals">
-          <div class="about-goals-label">// where I'm headed</div>
-          <p>I know where I want to go — the move now is closing the gap between the IT work I do every day and the analytics depth the data science field demands. My IS coursework gave me a real foundation in k-NN, logistic regression, clustering, and SVM, but I'm pushing that further deliberately outside the classroom.</p>
-          <p>The certifications that make sense next are on the analytics side. I already sit across the table from organizations every day as a consultant. Data scientist is the fourth fastest growing occupation in the country right now — and I already understand how these organizations actually work.</p>
-          <div class="goals-certs">
-            <span class="goals-cert-tag">Google Data Analytics Cert</span>
-            <span class="goals-cert-tag">IBM Data Science Professional</span>
-            <span class="goals-cert-tag">Tableau Certification</span>
-            <span class="goals-cert-tag">Power BI Certification</span>
+  <!-- ── ABOUT ── -->
+  <div class="sec-mantle">
+    <div class="sec-inner" id="about">
+      <div class="sec-header reveal">
+        <div class="sec-label">// 01 — about</div>
+        <h2 class="sec-title">Who I am.</h2>
+      </div>
+      <div class="about-layout">
+        <div class="about-text reveal from-left">
+          <p>My name is Mason Good and I'm based in Tampa, Florida. I'm completing my degree in Information Systems at USF with a focus on data science. Since as early as I can remember I was engrossed in technology — helping my mom fix the cords on the VHS and DVD players, that kind of thing. That curiosity never went away.</p>
+          <p>It led me to video games, then to IT, and eventually down the data science path. I love knowledge and I love learning, and data science is all about information. That pull has only grown stronger as my career has progressed.</p>
+          <p>My journey started at Best Buy's Geek Squad, where I learned that great IT isn't just about fixing things — it's about understanding people's needs. That foundation led me through infrastructure management at a credit union, and now to Process Panda, where I build custom ITSM solutions for enterprise clients like Perdue Farms and the City of San Jose.</p>
+          <div class="about-goals">
+            <div class="about-goals-label">// where I'm headed</div>
+            <p>I know where I want to go — the move now is closing the gap between the IT work I do every day and the analytics depth the data science field demands.</p>
+            <p>The certifications that make sense next are on the analytics side. I already sit across the table from organizations every day as a consultant. Data scientist is the fourth fastest growing occupation in the country right now — and I already understand how these organizations actually work.</p>
+            <div class="goals-certs">
+              <span class="goals-cert-tag">Google Data Analytics Cert</span>
+              <span class="goals-cert-tag">IBM Data Science Professional</span>
+              <span class="goals-cert-tag">Tableau Certification</span>
+              <span class="goals-cert-tag">Power BI Certification</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-right reveal from-right">
+          <div class="stat-row">
+            <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">years in IT</div></div>
+            <div class="stat-card"><div class="stat-num">3.9</div><div class="stat-label">GPA at USF</div></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">enterprise clients</div></div>
+            <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">active certs</div></div>
           </div>
         </div>
       </div>
-      <div>
-        <div class="about-stats">
-          <div class="stat-card">
-            <div class="stat-num">4+</div>
-            <div class="stat-label">years in IT</div>
+      <div class="about-coursework reveal">
+        <div class="about-coursework-label">// USF coursework highlights</div>
+        <div class="course-items">
+          <div class="course-item">
+            <div class="course-num">01</div>
+            <div class="course-name">R Programming</div>
+            <div class="course-detail">k-NN, logistic regression, decision trees, association rules, SVM — applied to real datasets. Built the NaCleaner R package.</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-num">3.9</div>
-            <div class="stat-label">GPA at USF</div>
+          <div class="course-item">
+            <div class="course-num">02</div>
+            <div class="course-name">Visual Analytics</div>
+            <div class="course-detail">Four ggplot2 visualizations for a World Happiness Report analysis. Data Engineer on a measles vaccination project using Shiny and Leaflet.</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-num">5+</div>
-            <div class="stat-label">enterprise clients</div>
+          <div class="course-item">
+            <div class="course-num">03</div>
+            <div class="course-name">Information Behavior</div>
+            <div class="course-detail">Annotated bibliography and research proposal on ITSM consultants' information-seeking behavior using Kuhlthau's ISP model.</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-num">2</div>
-            <div class="stat-label">active certs</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="about-coursework">
-      <div class="about-coursework-label">// USF coursework highlights</div>
-      <div class="course-items">
-        <div class="course-item">
-          <div class="course-name">R Programming</div>
-          <div class="course-detail">k-NN, logistic regression, decision trees, association rules, SVM — applied to real datasets. Built the NaCleaner R package.</div>
-        </div>
-        <div class="course-item">
-          <div class="course-name">Visual Analytics</div>
-          <div class="course-detail">Four ggplot2 visualizations for a World Happiness Report analysis. Data Engineer on a measles vaccination project using Shiny and Leaflet.</div>
-        </div>
-        <div class="course-item">
-          <div class="course-name">Information Behavior</div>
-          <div class="course-detail">Annotated bibliography and research proposal on ITSM consultants' information-seeking behavior using Kuhlthau's ISP model.</div>
-        </div>
-        <div class="course-item">
-          <div class="course-name">Cluster Analysis</div>
-          <div class="course-detail">Hierarchical and k-means clustering, silhouette analysis. Applied alongside SVM and Naive Bayes for prediction tasks.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="experience">
-    <div class="sec-header">
-      <div class="sec-label">// 02 — experience</div>
-      <h2 class="sec-title">Where I've worked.</h2>
-    </div>
-    <div class="exp-list">
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-period">Apr 2025 — Present</div>
-          <div class="exp-company">Process Panda</div>
-        </div>
-        <div>
-          <div class="exp-title">Implementation Specialist</div>
-          <div class="exp-location">Florida, United States · On-site</div>
-          <ul class="exp-bullets">
-            <li>Design and manage advanced SQL queries within HaloITSM for custom reporting, analytics, and dynamic data retrieval.</li>
-            <li>Administer and enhance the HaloITSM environment including custom fields, forms, and multi-select lookups.</li>
-            <li>Deploy tailored ITSM solutions for enterprise clients including Perdue Farms, Chef's Warehouse, and Bright Horizons.</li>
-            <li>Integrate and manage APIs to extend HaloITSM functionality and enable automation with external systems.</li>
-          </ul>
-          <div class="exp-tags">
-            <span class="tag">HaloITSM</span><span class="tag">MS SQL Server</span><span class="tag">REST APIs</span><span class="tag">ITIL</span><span class="tag">Azure AD</span><span class="tag">Python</span>
-          </div>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-period">Apr 2024 — Apr 2025</div>
-          <div class="exp-company">Pinellas Federal Credit Union</div>
-        </div>
-        <div>
-          <div class="exp-title">IT Support Specialist</div>
-          <div class="exp-location">United States · On-site</div>
-          <ul class="exp-bullets">
-            <li>Planned and deployed a company-wide workstation upgrade — imaged Dell OptiPlex desktops with Acronis.</li>
-            <li>Managed Active Directory and MS Exchange including user access, permissions, and system maintenance.</li>
-            <li>Monitored and troubleshot Cisco Firepower 1000 firewalls, Cisco 8000 series routers, and HP/Netgear managed switches.</li>
-            <li>Managed and backed up internal Dell servers via KVM.</li>
-          </ul>
-          <div class="exp-tags">
-            <span class="tag">Active Directory</span><span class="tag">MS Exchange</span><span class="tag">Cisco Firepower</span><span class="tag">RDP</span><span class="tag">Symitar</span><span class="tag">SentinelOne</span>
-          </div>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-period">Jun 2022 — Apr 2024</div>
-          <div class="exp-company">Best Buy — Geek Squad</div>
-        </div>
-        <div>
-          <div class="exp-title">Computer Repair Technician</div>
-          <div class="exp-location">Tampa, Florida · On-site</div>
-          <ul class="exp-bullets">
-            <li>Built and troubleshot custom desktop systems to user-defined specifications.</li>
-            <li>Performed hardware repairs on laptops and iPhones (screens, batteries, HDD, RAM).</li>
-            <li>Managed and tracked all parts for Apple and PC repairs with meticulous documentation.</li>
-            <li>Handled device shipping and tracking through FedEx/UPS for phones, TVs, laptops, and consoles.</li>
-          </ul>
-          <div class="exp-tags">
-            <span class="tag">Windows OS</span><span class="tag">macOS</span><span class="tag">Hardware Repair</span><span class="tag">iOS</span><span class="tag">MS 365</span><span class="tag">Documentation</span>
+          <div class="course-item">
+            <div class="course-num">04</div>
+            <div class="course-name">Cluster Analysis</div>
+            <div class="course-detail">Hierarchical and k-means clustering, silhouette analysis. Applied alongside SVM and Naive Bayes for prediction tasks.</div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="skills">
-    <div class="sec-header">
-      <div class="sec-label">// 03 — skills</div>
-      <h2 class="sec-title">What I work with.</h2>
+  <!-- ── EXPERIENCE ── -->
+  <div class="sec-base">
+    <div class="sec-inner" id="experience">
+      <div class="sec-header reveal">
+        <div class="sec-label">// 02 — experience</div>
+        <h2 class="sec-title">Where I've worked.</h2>
+      </div>
+      <div class="exp-list">
+        <div class="exp-item reveal">
+          <div class="exp-meta">
+            <div class="exp-period">Apr 2025<br>Present</div>
+            <div class="exp-company">Process Panda</div>
+          </div>
+          <div class="exp-body">
+            <div class="exp-title">Implementation Specialist</div>
+            <div class="exp-location">Florida, United States · On-site</div>
+            <ul class="exp-bullets">
+              <li>Design and manage advanced SQL queries within HaloITSM for custom reporting, analytics, and dynamic data retrieval.</li>
+              <li>Administer and enhance the HaloITSM environment including custom fields, forms, and multi-select lookups.</li>
+              <li>Deploy tailored ITSM solutions for enterprise clients including Perdue Farms, Chef's Warehouse, and Bright Horizons.</li>
+              <li>Integrate and manage APIs to extend HaloITSM functionality and enable automation with external systems.</li>
+            </ul>
+            <div class="exp-tags">
+              <span class="tag">HaloITSM</span><span class="tag">MS SQL Server</span><span class="tag">REST APIs</span><span class="tag">ITIL</span><span class="tag">Azure AD</span><span class="tag">Python</span>
+            </div>
+          </div>
+        </div>
+        <div class="exp-item reveal reveal-delay-1">
+          <div class="exp-meta">
+            <div class="exp-period">Apr 2024<br>Apr 2025</div>
+            <div class="exp-company">Pinellas FCU</div>
+          </div>
+          <div class="exp-body">
+            <div class="exp-title">IT Support Specialist</div>
+            <div class="exp-location">United States · On-site</div>
+            <ul class="exp-bullets">
+              <li>Planned and deployed a company-wide workstation upgrade — imaged Dell OptiPlex desktops with Acronis.</li>
+              <li>Managed Active Directory and MS Exchange including user access, permissions, and system maintenance.</li>
+              <li>Monitored and troubleshot Cisco Firepower 1000 firewalls, Cisco 8000 series routers, and HP/Netgear managed switches.</li>
+              <li>Managed and backed up internal Dell servers via KVM.</li>
+            </ul>
+            <div class="exp-tags">
+              <span class="tag">Active Directory</span><span class="tag">MS Exchange</span><span class="tag">Cisco Firepower</span><span class="tag">RDP</span><span class="tag">Symitar</span><span class="tag">SentinelOne</span>
+            </div>
+          </div>
+        </div>
+        <div class="exp-item reveal reveal-delay-2">
+          <div class="exp-meta">
+            <div class="exp-period">Jun 2022<br>Apr 2024</div>
+            <div class="exp-company">Best Buy</div>
+          </div>
+          <div class="exp-body">
+            <div class="exp-title">Computer Repair Technician</div>
+            <div class="exp-location">Tampa, Florida · On-site</div>
+            <ul class="exp-bullets">
+              <li>Built and troubleshot custom desktop systems to user-defined specifications.</li>
+              <li>Performed hardware repairs on laptops and iPhones (screens, batteries, HDD, RAM).</li>
+              <li>Managed and tracked all parts for Apple and PC repairs with meticulous documentation.</li>
+              <li>Handled device shipping and tracking through FedEx/UPS for phones, TVs, laptops, and consoles.</li>
+            </ul>
+            <div class="exp-tags">
+              <span class="tag">Windows OS</span><span class="tag">macOS</span><span class="tag">Hardware Repair</span><span class="tag">iOS</span><span class="tag">MS 365</span><span class="tag">Documentation</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <div class="skill-group-label">ITSM & Platforms</div>
-        <div class="skill-items">
-          <span class="skill-badge">HaloITSM</span><span class="skill-badge">ITIL v4</span><span class="skill-badge">Microsoft Azure</span><span class="skill-badge">Azure AD</span><span class="skill-badge">CrowdStrike</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-label">Languages</div>
-        <div class="skill-items">
-          <span class="skill-badge">SQL</span><span class="skill-badge">Python</span><span class="skill-badge">R</span><span class="skill-badge">REST APIs</span><span class="skill-badge">JSON</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-label">Infrastructure</div>
-        <div class="skill-items">
-          <span class="skill-badge">Active Directory</span><span class="skill-badge">MS Exchange</span><span class="skill-badge">Cisco Firepower</span><span class="skill-badge">Managed Switches</span><span class="skill-badge">KVM</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-label">Data & Analytics</div>
-        <div class="skill-items">
-          <span class="skill-badge">MS SQL Server</span><span class="skill-badge">Visual Analytics</span><span class="skill-badge">Power BI</span><span class="skill-badge">ggplot2</span><span class="skill-badge">Data Analysis</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
 
-  <section id="education">
-    <div class="sec-header">
-      <div class="sec-label">// 04 — education & certs</div>
-      <h2 class="sec-title">Credentials.</h2>
-    </div>
-    <div class="edu-grid">
-      <div class="edu-card">
-        <div class="edu-school">University of South Florida</div>
-        <div class="edu-degree">BS — Information Science, Data Sci & Analytics</div>
-        <div class="edu-detail">Aug 2024 – May 2026 &nbsp;·&nbsp; GPA: 3.9</div>
+  <!-- ── SKILLS ── -->
+  <div class="sec-mantle">
+    <div class="sec-inner" id="skills">
+      <div class="sec-header reveal">
+        <div class="sec-label">// 03 — skills</div>
+        <h2 class="sec-title">What I work with.</h2>
       </div>
-      <div class="edu-card">
-        <div class="edu-school">St. Petersburg College</div>
-        <div class="edu-degree">Associate's Degree — Information Technology</div>
-        <div class="edu-detail">Aug 2020 – May 2023 &nbsp;·&nbsp; GPA: 3.6</div>
-      </div>
-    </div>
-    <div class="cert-grid">
-      <div class="cert-card">
-        <div class="cert-icon">A+</div>
-        <div>
-          <div class="cert-name">CompTIA A+</div>
-          <div class="cert-issuer">CompTIA</div>
-          <div class="cert-exp">Issued Sep 2025 · Expires Sep 2028</div>
+      <div class="skills-layout">
+        <div class="skill-group reveal scale-in">
+          <div class="skill-group-bg">01</div>
+          <div class="skill-group-label">ITSM & Platforms</div>
+          <div class="skill-items">
+            <span class="skill-badge">HaloITSM</span><span class="skill-badge">ITIL v4</span><span class="skill-badge">Microsoft Azure</span><span class="skill-badge">Azure AD</span><span class="skill-badge">CrowdStrike</span>
+          </div>
+        </div>
+        <div class="skill-group reveal scale-in reveal-delay-1">
+          <div class="skill-group-bg">02</div>
+          <div class="skill-group-label">Languages</div>
+          <div class="skill-items">
+            <span class="skill-badge">SQL</span><span class="skill-badge">Python</span><span class="skill-badge">R</span><span class="skill-badge">REST APIs</span><span class="skill-badge">JSON</span>
+          </div>
+        </div>
+        <div class="skill-group reveal scale-in reveal-delay-2">
+          <div class="skill-group-bg">03</div>
+          <div class="skill-group-label">Infrastructure</div>
+          <div class="skill-items">
+            <span class="skill-badge">Active Directory</span><span class="skill-badge">MS Exchange</span><span class="skill-badge">Cisco Firepower</span><span class="skill-badge">Managed Switches</span><span class="skill-badge">KVM</span>
+          </div>
+        </div>
+        <div class="skill-group reveal scale-in reveal-delay-3">
+          <div class="skill-group-bg">04</div>
+          <div class="skill-group-label">Data & Analytics</div>
+          <div class="skill-items">
+            <span class="skill-badge">MS SQL Server</span><span class="skill-badge">Visual Analytics</span><span class="skill-badge">Power BI</span><span class="skill-badge">ggplot2</span><span class="skill-badge">Data Analysis</span>
+          </div>
         </div>
       </div>
-      <div class="cert-card">
-        <div class="cert-icon">ITIL</div>
-        <div>
-          <div class="cert-name">ITIL® Foundation</div>
-          <div class="cert-issuer">PeopleCert</div>
-          <div class="cert-exp">Issued Jun 2025 · Expires Jun 2028</div>
-        </div>
-      </div>
     </div>
-  </section>
+  </div>
 
-  <section id="contact">
-    <div class="contact-inner">
-      <h2 class="contact-title">Let's work together.</h2>
-      <p class="contact-sub">I'm always open to interesting problems, new projects, or just a good conversation about IT.</p>
-      <div class="contact-links">
+  <!-- ── EDUCATION ── -->
+  <div class="sec-base">
+    <div class="sec-inner" id="education">
+      <div class="sec-header reveal">
+        <div class="sec-label">// 04 — education & certs</div>
+        <h2 class="sec-title">Credentials.</h2>
+      </div>
+      <div class="edu-layout">
+        <div class="edu-degrees reveal from-left">
+          <div class="edu-card">
+            <div class="edu-school">University of South Florida</div>
+            <div class="edu-degree">BS — Information Science, Data Sci & Analytics</div>
+            <div class="edu-detail">Aug 2024 – May 2026 &nbsp;·&nbsp; GPA: 3.9</div>
+          </div>
+          <div class="edu-card">
+            <div class="edu-school">St. Petersburg College</div>
+            <div class="edu-degree">Associate's Degree — Information Technology</div>
+            <div class="edu-detail">Aug 2020 – May 2023 &nbsp;·&nbsp; GPA: 3.6</div>
+          </div>
+        </div>
+        <div class="edu-certs reveal from-right">
+          <div class="edu-certs-label">// certifications</div>
+          <div class="cert-card">
+            <div class="cert-icon">A+</div>
+            <div>
+              <div class="cert-name">CompTIA A+</div>
+              <div class="cert-issuer">CompTIA</div>
+              <div class="cert-exp">Issued Sep 2025 · Expires Sep 2028</div>
+            </div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-icon">ITIL</div>
+            <div>
+              <div class="cert-name">ITIL® Foundation</div>
+              <div class="cert-issuer">PeopleCert</div>
+              <div class="cert-exp">Issued Jun 2025 · Expires Jun 2028</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BLOGS ── -->
+  <div class="sec-mantle">
+    <div class="sec-inner" id="blogs">
+      <div class="sec-header reveal">
+        <div class="sec-label">// 05 — my blogs</div>
+        <h2 class="sec-title">Where I write.</h2>
+      </div>
+      <p class="blogs-intro reveal">I maintain three independent blogs covering programming, data visualization, and critical thinking. They're where I think out loud outside of work and school.</p>
+      <div class="blogs-grid">
+        <a href="https://masons-programming-journal.blogspot.com" class="blog-card blog-card-prog reveal scale-in" target="_blank" rel="noopener">
+          <div class="blog-card-eyebrow">// programming</div>
+          <div class="blog-card-title">Mason's Programming Journal</div>
+          <div class="blog-card-desc">Dev notes, code walkthroughs, project writeups, and everything I'm learning at the intersection of SQL, Python, and R.</div>
+          <div class="blog-card-link">masons-programming-journal.blogspot.com →</div>
+        </a>
+        <a href="https://visualizetheuniverse.blogspot.com/" class="blog-card blog-card-viz reveal scale-in reveal-delay-1" target="_blank" rel="noopener">
+          <div class="blog-card-eyebrow">// data visualization</div>
+          <div class="blog-card-title">Visualize the Universe</div>
+          <div class="blog-card-desc">Data viz projects, ggplot2 deep dives, and visual explorations of datasets that deserve a closer look.</div>
+          <div class="blog-card-link">visualizetheuniverse.blogspot.com →</div>
+        </a>
+        <a href="https://thinkcritically84.wordpress.com/" class="blog-card blog-card-think reveal scale-in reveal-delay-2" target="_blank" rel="noopener">
+          <div class="blog-card-eyebrow">// critical thinking</div>
+          <div class="blog-card-title">Think Critically</div>
+          <div class="blog-card-desc">Essays on technology, society, and the practice of reasoning carefully about things that matter.</div>
+          <div class="blog-card-link">thinkcritically84.wordpress.com →</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WRITING ── -->
+  <div class="sec-base">
+    <div class="sec-inner" id="writing">
+      <div class="sec-header reveal">
+        <div class="sec-label">// 06 — writing & case studies</div>
+        <h2 class="sec-title">Things I've written.</h2>
+      </div>
+      <p class="writing-intro reveal">Academic work, technical case studies, and reflections on the field — from ITSM implementation deep dives to thoughts on the data science job market.</p>
+      <div class="writing-list reveal">
+        <a href="case-study-software-db.html" class="writing-item">
+          <div class="writing-item-left">
+            <div class="writing-item-category">// case study · database design</div>
+            <div class="writing-item-title">Software Licensing Database — Case Study</div>
+            <div class="writing-item-desc">End-to-end database design for a software licensing management system: ER diagrams, normalization, and SQL implementation.</div>
+          </div>
+          <div class="writing-item-right">
+            <div class="writing-item-date">2026</div>
+            <div class="writing-item-arrow">→</div>
+          </div>
+        </a>
+        <a href="article-job-market-realities.html" class="writing-item">
+          <div class="writing-item-left">
+            <div class="writing-item-category">// reflection · career development</div>
+            <div class="writing-item-title">Job Market Realities for Data Professionals</div>
+            <div class="writing-item-desc">Reflections on a Posit PBC career panel featuring three data science industry leaders — on AI, job titles, and what it actually takes to break into the field right now.</div>
+          </div>
+          <div class="writing-item-right">
+            <div class="writing-item-date">Jun 2026</div>
+            <div class="writing-item-arrow">→</div>
+          </div>
+        </a>
+        <a href="article-ai-ethics.html" class="writing-item">
+          <div class="writing-item-left">
+            <div class="writing-item-category">// essay · technology ethics</div>
+            <div class="writing-item-title">The Ethics of Artificial Intelligence</div>
+            <div class="writing-item-desc">A senior capstone essay arguing that AI is a tool, not a moral agent — and that the ethical weight of its deployment falls entirely on the humans who build, regulate, and use it.</div>
+          </div>
+          <div class="writing-item-right">
+            <div class="writing-item-date">Jun 2026</div>
+            <div class="writing-item-arrow">→</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CONTACT ── -->
+  <div class="contact-shell">
+    <div class="contact-inner" id="contact">
+      <h2 class="contact-title reveal">Let's work together.</h2>
+      <p class="contact-sub reveal reveal-delay-1">I'm always open to interesting problems, new projects, or just a good conversation about IT.</p>
+      <div class="contact-links reveal reveal-delay-2">
         <a href="mailto:masongood01@outlook.com" class="contact-link primary">masongood01@outlook.com</a>
         <a href="https://www.linkedin.com/in/mason-good-76389b259/" class="contact-link" target="_blank">LinkedIn</a>
         <a href="https://github.com/Mgood028" class="contact-link" target="_blank">GitHub</a>
@@ -398,12 +739,40 @@
         <a href="https://thinkcritically84.wordpress.com/" class="contact-link" target="_blank">Think Critically</a>
       </div>
     </div>
-  </section>
+  </div>
+
 </main>
 
 <footer>
   <p>mason good · built with intent · florida</p>
 </footer>
+
+<script>
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+        observer.unobserve(el.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Nav active state on scroll ──
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--mauve)' : '';
+    });
+  }, { passive: true });
+</script>
 
 </body>
 </html>
