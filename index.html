@@ -115,6 +115,12 @@
   .goals-certs{display:flex;flex-wrap:wrap;gap:6px}
   .goals-cert-tag{font-family:var(--mono);font-size:10px;padding:3px 10px;background:rgba(203,166,247,0.08);border:1px solid rgba(203,166,247,0.25);border-radius:20px;color:var(--mauve);letter-spacing:0.04em}
 
+  /* headshot */
+  .headshot-wrap{display:flex;align-items:center;gap:1.25rem;padding:1.25rem;background:var(--base);border:1px solid var(--surface0);border-radius:10px}
+  .headshot{width:96px;height:96px;border-radius:10px;object-fit:cover;flex-shrink:0;border:1px solid var(--surface1);display:block}
+  .headshot-name{font-size:16px;font-weight:600;color:var(--text);line-height:1.2;margin-bottom:0.25rem}
+  .headshot-role{font-family:var(--mono);font-size:11px;color:var(--overlay1);line-height:1.5}
+
   /* stat cards — stacked on right */
   .about-right{display:flex;flex-direction:column;gap:1.25rem}
   .stat-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
@@ -338,6 +344,17 @@
   .writing-item:nth-child(2):hover .writing-item-arrow{color:var(--mauve)}
   .writing-item:nth-child(3):hover .writing-item-arrow{color:var(--peach)}
 
+  /* ── VIDEO ── */
+  .video-block{margin-top:4rem}
+  .video-label{font-family:var(--mono);font-size:11px;color:var(--mauve);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem}
+  .video-title{font-size:20px;font-weight:600;color:var(--text);margin-bottom:1.25rem;letter-spacing:-0.01em}
+  .video-wrap{
+    position:relative;width:100%;padding-top:56.25%;
+    border:1px solid var(--surface0);border-radius:12px;
+    overflow:hidden;background:var(--mantle);
+  }
+  .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+
   /* ─────────────────────────────────────────
      CONTACT
   ───────────────────────────────────────── */
@@ -458,6 +475,13 @@
           </div>
         </div>
         <div class="about-right reveal from-right">
+          <div class="headshot-wrap">
+            <img src="assets/headshot.jpg" alt="Mason Good" class="headshot">
+            <div>
+              <div class="headshot-name">Mason Good</div>
+              <div class="headshot-role">Tampa, FL<br>Implementation Specialist</div>
+            </div>
+          </div>
           <div class="stat-row">
             <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">years in IT</div></div>
             <div class="stat-card"><div class="stat-num">3.9</div><div class="stat-label">GPA at USF</div></div>
@@ -721,6 +745,19 @@
             <div class="writing-item-arrow">→</div>
           </div>
         </a>
+      </div>
+
+      <!-- video -->
+      <div class="video-block reveal">
+        <div class="video-label">// video</div>
+        <div class="video-title">BSIS College Review.</div>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/YCd21KC6YG8"
+                  title="Mason Good — portfolio video"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
       </div>
     </div>
   </div>
